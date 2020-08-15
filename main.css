@@ -1,0 +1,49 @@
+/* general */
+html {
+    background-color: #ffffb3;
+    font-family: 'Radley';
+    font-size: 120%;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+    text-align: justify;
+}
+body {
+    margin: 1rem;
+}
+h1, h2, nav {
+    text-shadow: 0 0 5px #ffffff;
+}
+h1 {
+    font-size: 2rem;
+}
+h2 {
+    font-size: 1.5rem;
+}
+header {
+    text-align: center;
+}
+main {
+    align-content: center;
+    background-color: white;
+    border: 5px solid brown;
+    margin: 25% 25% auto;
+}
+main a {
+    color: blue;
+    text-decoration: none;
+}
+main a:hover {
+    color: black;
+}
+main p {
+    margin: 5px;
+    color: black;
+    overflow: auto;
+    text-align: justify;
+    text-decoration: none;
+}
+@media (max-width: 1000px) {
+    main {
+        margin: auto;
+    }
+}

@@ -1,0 +1,51 @@
+body {
+    font-family: 'Radley';
+    font-size: 110%;
+}
+main {
+    box-shadow: 0 0 10px grey;
+    display: grid;
+    grid-gap: 0;
+    grid-template-columns: 75% auto;
+    align-content: center;
+}
+.sidea {
+    margin: 5px 0 30px 30px;
+}
+.sideb {
+    margin: auto;
+    padding: 30px;
+}
+.dropdown-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto;
+    margin: auto;
+}
+.warning {
+    border: 2px solid grey;
+    color: grey;
+    text-align: center;
+}
+#too-small {
+    display: none;
+    padding: auto;
+}
+/*
+@media (max-width: 610px) {
+    main {
+        display: none;
+    }
+    #too-small {
+        display: block;
+    }
+}
+@media (max-height: 410px) {
+    main {
+        display: none;
+    }
+    #too-small {
+        display: block;
+    }
+}
+*/

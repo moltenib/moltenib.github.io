@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+
+    <meta property="og:description"
+        content="An interactive web page to find the fingering for each note that can be played on the recorder." />
+    <meta property="og:image" type="image/jpeg"
+        content="https://stamby.github.io/recorder/logo.jpg" />
+    <meta property="og:title" content="Recorder Fingering Graph" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stamby.github.io/recorder" />
+    <meta property="og:title" content="Recorder Fingering Graph" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stamby.github.io/recorder" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recorder Fingering Graph</title>
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Radley">
+
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/sidea.css">
+    <link rel="stylesheet" href="css/sideb.css">
+
+    <script src="js/variables.js"></script>
+    <script src="js/keys.js"></script>
+    <script src="js/positions.js"></script>
+    <script src="js/note-operations.js"></script>
+    <script src="js/select.js"></script>
+    <script src="js/score.js"></script>
+    <script src="js/score-hover.js"></script>
+
+    <body>
+        <main>
+            <div class="sidea">
+                <h1>Recorder Fingering Graph</h1>
+                <p>Hover your mouse on a note below to see its corresponding fingering on the recorder.</p>
+                <img class="on-score" id="treble-clef" src="svg/treble.svg">
+                <img class="on-score" id="bass-clef" src="svg/bass.svg">
+                <img class="on-score key-signature sharp" id="sharp-0-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-1-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-2-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-3-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-4-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-5-g" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-6-g" src="svg/sharp.svg">
+                <img class="on-score key-signature flat" id="flat-0-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-1-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-2-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-3-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-4-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-5-g" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-6-g" src="svg/flat.svg">
+                <img class="on-score key-signature sharp" id="sharp-0-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-1-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-2-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-3-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-4-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-5-f" src="svg/sharp.svg">
+                <img class="on-score key-signature sharp" id="sharp-6-f" src="svg/sharp.svg">
+                <img class="on-score key-signature flat" id="flat-0-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-1-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-2-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-3-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-4-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-5-f" src="svg/flat.svg">
+                <img class="on-score key-signature flat" id="flat-6-f" src="svg/flat.svg">
+                <img class="on-score crotchet"
+                    id="crotchet-stem-down" src="svg/crotchet-stem-down.svg">
+                <img class="on-score crotchet"
+                    id="crotchet-stem-up" src="svg/crotchet-stem-up.svg">
+                <img class="on-score accidental"
+                    id="accidental-sharp" src="svg/sharp.svg">
+                <img class="on-score accidental"
+                    id="accidental-flat" src="svg/flat.svg">
+                <img id="semibreve" src="svg/semibreve.svg">
+                <ul id="score" onmouseout="on_score_mouseout(this)">
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="d7" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="c7" class="space"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="b6" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="a6" class="space"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="g6" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="f6" class="space"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="e6" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="d6" class="space"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="c6" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="b5" class="space"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="a5" class="line line-short-above"></li>
+                    <li onmouseover="on_note_above_score_mouseover(this)"
+                        id="g5" class="space"></li>
+                    <li onmouseover="on_note_above_middle_mouseover(this)"
+                        id="f5" class="line line-long"></li>
+                    <li onmouseover="on_note_above_middle_mouseover(this)"
+                        id="e5" class="space"></li>
+                    <li onmouseover="on_note_above_middle_mouseover(this)"
+                        id="d5" class="line line-long"></li>
+                    <li onmouseover="on_note_above_middle_mouseover(this)"
+                        id="c5" class="space"></li>
+                    <li onmouseover="on_note_above_middle_mouseover(this)"
+                        id="b4" class="line line-long"></li>
+                    <li onmouseover="on_note_below_middle_mouseover(this)"
+                        id="a4" class="space"></li>
+                    <li onmouseover="on_note_below_middle_mouseover(this)"
+                        id="g4" class="line line-long"></li>
+                    <li onmouseover="on_note_below_middle_mouseover(this)"
+                        id="f4" class="space"></li>
+                    <li onmouseover="on_note_below_middle_mouseover(this)"
+                        id="e4" class="line line-long"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="d4" class="space"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="c4" class="line line-short-below"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="b3" class="space"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="a3" class="line line-short-below"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="g3" class="space"></li>
+                    <li onmouseover="on_note_below_score_mouseover(this)"
+                        id="f3" class="line line-short-below"></li>
+                </ul>
+                <div class="dropdown-container">
+                    <div>
+                        <label for="size">Recorder size:</label>
+                        <select name="size" id="size"
+                                onchange="select_size(this.value)">
+                            <!-- <option value="1">Garklein</option>
+                            <option value="0">Sopranino</option> -->
+                            <option value="1" selected="selected">Soprano</option>
+                            <option value="2">Alto</option>
+                            <!-- <option value="5">Voice Flute</option> -->
+                            <option value="3">Tenor</option>
+                            <option value="4">Bass</option>
+                            <!-- <option value="8">Great Bass</option>
+                            <option value="9">Contrabass</option>
+                            <option value="10">Sub-Contrabass</option> -->
+                        </select>
+                    </div>
+                    <div>
+                        <label for="style">Style:</label>
+                        <select name="style" id="style"
+                                onchange="select_style(this.value)">
+                            <option value="g" selected="selected">German</option>
+                            <option value="b">Baroque or English</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="accidental">Accidentals:</label>
+                        <select name="accidental" id="accidental"
+                                onchange="select_accidental(this.value)">
+                            <option value="1">Sharp</option>
+                            <option value="0" selected="selected">None</option>
+                            <option value="-1">Flat</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="as-written">Sound as written:</label>
+                        <select name="as-written" id="as-written"
+                                onchange="select_as_written(this.value)">
+                            <option value="t">Yes</option>
+                            <option value="f" selected="selected">No</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="key">Key:</label>
+                        <select name="key" id="key" onchange="select_key(this.value)">
+                            <option value="0">C# major / A# minor</option>
+                            <option value="1">F# major / D# minor</option>
+                            <option value="2">B major / G# minor</option>
+                            <option value="3">E major / C# minor</option>
+                            <option value="4">A major / F# minor</option>
+                            <option value="5">D major / B minor</option>
+                            <option value="6">G major / E minor</option>
+                            <option value="7" selected="selected">C major / A minor</option>
+                            <option value="8">F major / D minor</option>
+                            <option value="9">Bb major / G minor</option>
+                            <option value="10">Eb major / C minor</option>
+                            <option value="11">Ab major / F minor</option>
+                            <option value="12">Db major / Bb minor</option>
+                            <option value="13">Gb major / Eb minor</option>
+                            <option value="14">Cb major / Ab minor</option>
+                        </select>
+
+                    </div>
+                    <div>
+                        <label for="clef">Clef:</label>
+                        <select name="clef" id="clef" onchange="select_clef(this.value)">
+                            <option value="g" selected="selected">Treble</option>
+                            <option value="f">Bass</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="sideb">
+                <ul id="recorder">
+                    <li id="0" class="hole hole-large"></li>
+                    <hr>
+                    <li id="1" class="hole hole-large"></li>
+                    <li id="2" class="hole hole-large"></li>
+                    <li id="3" class="hole hole-large"></li>
+                    <li id="4" class="hole hole-large"></li>
+                    <li id="5" class="hole hole-large"></li>
+                    <li class="hole-container">
+                        <span id="6a" class="hole hole-small"></span>
+                        <span id="6b" class="hole hole-small"></span>
+                    </li>
+                    <li class="hole-container">
+                        <span id="7a" class="hole hole-small"></span>
+                        <span id="7b" class="hole hole-small"></span>
+                    </li>
+                </ul>
+                <div class="warning" id="out-of-range">
+                    <p>Note: Out of range. You may choose a different size of recorder to reach this tone.</p>
+                </div>
+            </div>
+        </main>
+        <div class="warning" id="too-small">
+            <h3>Warning: Screen too small.</h6>
+        </div>
+    </body>
+</html>

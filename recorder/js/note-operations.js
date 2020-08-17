@@ -1,4 +1,4 @@
-function add_tone(note) {
+function line_up(note) {
     if (note[0] == "b") {
         /* One octave down */
         return "c" + (parseInt(note[1]) + 1);
@@ -13,7 +13,7 @@ function add_tone(note) {
         note[0].charCodeAt() + 1) + note[1];
 }
 
-function substract_tone(note) {
+function line_down(note) {
     if (note[0] == "c") {
         return "b" + (parseInt(note[1]) - 1);
 
@@ -26,21 +26,21 @@ function substract_tone(note) {
         note[0].charCodeAt() - 1) + note[1];
 }
 
-function add_tones(note, n) {
+function lines_up(note, n) {
     var result = note;
 
     for (var i = 0; i < n; i++) {
-        result = add_tone(result);
+        result = line_up(result);
     }
 
     return result;
 }
 
-function substract_tones(note, n) {
+function lines_down(note, n) {
     var result = note;
 
     for (var i = 0; i < n; i++) {
-        result = substract_tone(result);
+        result = line_down(result);
     }
 
     return result;

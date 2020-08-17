@@ -14,7 +14,7 @@ function display_accidental(crotchet, line) {
                     ) || (
                         clef == "f"
                         && KEYS[key].indexOf(
-                            add_tones(line.id, 3)[0]) == -1
+                            lines_up(line.id, 3)[0]) == -1
                     )
                 ) || key >= 7
             )
@@ -36,11 +36,11 @@ function display_accidental(crotchet, line) {
                         clef == "g"
                         /* The current key does not make this a flat */
                         && KEYS[key].indexOf(
-                            substract_tone(line.id)[0]) == -1
+                            line_down(line.id)[0]) == -1
                     ) || (
                         clef == "f"
                         && KEYS[key].indexOf(
-                            add_tone(line.id)[0]) == -1
+                            line_up(line.id)[0]) == -1
                     )
                 ) || key <= 7
             )

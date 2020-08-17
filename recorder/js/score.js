@@ -4,7 +4,7 @@ function get_note(note) {
 
     if (clef == "f") {
         /* This will turn, for example, `d5' into `f3' */
-        n = add_tones(
+        n = lines_up(
             add_octaves(n, -2), 2);
 
     }
@@ -16,7 +16,7 @@ function get_note(note) {
         if (n[0] == "e" || n[0] == "b") {
             sharp = "n";
 
-            n = add_tone(n);
+            n = line_up(n);
 
         } else
             sharp = "s";
@@ -25,7 +25,7 @@ function get_note(note) {
         sharp = "n";
 
     } else if (accidental == "-1") {
-        n = substract_tone(n);
+        n = line_down(n);
 
         if (n[0] == "e" || n[0] == "b") {
             sharp = "n";
@@ -35,15 +35,14 @@ function get_note(note) {
 
         }
 
-    }
-
-    if (
+    /* If no accidental has been chosen, look at the key */
+    } else if (
             key < 7
             && KEYS[key].indexOf(n[0]) != -1
     ) {
         if (sharp == "s") {
-            /* Already a sharp, make it a natural note */
-            n = add_tone(n);
+            /* Already a sharp, don't do anything */
+            n = line_up(n);
 
             sharp = "n";
 
@@ -54,9 +53,9 @@ function get_note(note) {
 
     } else if (
             key > 7
-            && KEYS[key].indexOf(substract_tone(note)[0]) != -1
+            && KEYS[key].indexOf(line_down(note)[0]) != -1
     ) {
-        n = substract_tone(n);
+        n = line_down(n);
 
         if (sharp == "s") {
             /* Already a sharp, make it a natural note */
@@ -74,7 +73,7 @@ function get_note(note) {
     return [n, sharp];
 }
 function note_and_sharp_to_alto(note_and_sharp) {
-    var n = substract_tones(note_and_sharp[0], 2);
+    var n = lines_down(note_and_sharp[0], 2);
 
     var sharp = note_and_sharp[1];
 
@@ -83,12 +82,12 @@ function note_and_sharp_to_alto(note_and_sharp) {
             sharp = "n";
 
         } else {
-            n = substract_tone(n);
+            n = line_down(n);
 
         }
 
     } else {
-        n = substract_tone(n);
+        n = line_down(n);
 
         if (n[0] == "f") {
             sharp = "s";

@@ -90,4 +90,32 @@ function add_octaves(note, n) {
     return note[0] + String.fromCharCode(
         note[1].charCodeAt() + n);
 }
+function add_semitone(note) {
+    var sharp;
+
+    if (note[0] == "e" || note[0] == "b") {
+        sharp = "n";
+
+        note = line_up(note);
+
+    } else
+        sharp = "s";
+
+    return [note, sharp];
+
+}
+function substract_semitone(note) {
+    var sharp;
+
+    note = line_down(note);
+
+    if (note[0] == "e" || note[0] == "b") {
+        sharp = "n";
+
+    } else
+        sharp = "s";
+
+    return [note, sharp];
+
+}
 

@@ -9,68 +9,28 @@ function get_note(note) {
 
     }
 
-    /* Sharp: `s' for sharp, `n' for natural */
-    var sharp;
-
-    if (accidental == "1") {
-        if (n[0] == "e" || n[0] == "b") {
-            sharp = "n";
-
-            n = line_up(n);
-
-        } else
-            sharp = "s";
-
-    } else if (accidental == "0") {
-        sharp = "n";
-
-    } else if (accidental == "-1") {
-        n = line_down(n);
-
-        if (n[0] == "e" || n[0] == "b") {
-            sharp = "n";
-
-        } else {
-            sharp = "s";
-
-        }
-
-    /* If no accidental has been chosen, look at the key */
-    } else if (
-            key < 7
-            && KEYS[key].indexOf(n[0]) != -1
+    if (
+            accidental == "1"
+            || (
+                key < 7
+                && KEYS[key].indexOf(n[0]) != -1
+            )
     ) {
-        if (sharp == "s") {
-            /* Already a sharp, don't do anything */
-            n = line_up(n);
-
-            sharp = "n";
-
-        } else {
-            sharp = "s";
-
-        }
+        return add_semitone(n);
 
     } else if (
-            key > 7
-            && KEYS[key].indexOf(line_down(note)[0]) != -1
+            accidental == "-1"
+            || (
+                key > 7
+                && KEYS[key].indexOf(line_down(note)[0]) != -1
+            )
     ) {
-        n = line_down(n);
-
-        if (sharp == "s") {
-            /* Already a sharp, make it a natural note */
-            sharp = "n";
-
-        } else {
-            if (n[0] != "e" && n[0] != "b")
-                sharp = "s";
-
-        }
+        return substract_semitone(n);
 
     }
 
     /* Return search criteria for the position map */
-    return [n, sharp];
+    return [n, "n"];
 }
 function note_and_sharp_to_alto(note_and_sharp) {
     var n = lines_down(note_and_sharp[0], 2);

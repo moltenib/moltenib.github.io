@@ -60,3 +60,11 @@ main {
         display: block;
     }
 }
+@media (min-width: 1000px) {
+    .sep {
+        display: none;
+    }
+    .description {
+        float: left;
+    }
+}

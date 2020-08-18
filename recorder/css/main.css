@@ -1,6 +1,8 @@
 body {
     font-family: 'Radley';
     font-size: 110%;
+}
+main {
     box-shadow: 0 0 10px grey;
     padding-right: 60px;
     padding-left: 60px;

@@ -58,7 +58,7 @@ function display_accidental(crotchet, line) {
         /* If an accidental ought to be displayed */
         element.style.marginLeft =
             crotchet.offsetLeft
-            - crotchet.width / 1.3
+            - 75
             + "px";
 
         element.style.marginTop = 

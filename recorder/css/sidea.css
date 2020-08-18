@@ -1,6 +1,3 @@
-#semibreve {
-    position: absolute;
-}
 #score {
     position: relative;
     width: 100%;
@@ -37,14 +34,6 @@
     margin-top: 83px;
     width: 110px;
     display: none;
-}
-#semibreve {
-    display: none;
-    margin-top: 78px;
-    position: absolute;
-    z-index: 100;
-    height: 25px;
-    left: 36.3%;
 }
 .sharp {
     display: none;
@@ -172,6 +161,7 @@
 }
 .accidental {
     display: none;
+    z-index: 10;
 }
 #accidental-sharp {
     width: 13px;

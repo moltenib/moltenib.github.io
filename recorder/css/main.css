@@ -1,26 +1,37 @@
 body {
     font-family: 'Radley';
     font-size: 110%;
+    box-shadow: 0 0 10px grey;
+    padding-right: 60px;
+    padding-left: 60px;
+    padding-bottom: 30px;
 }
 main {
-    box-shadow: 0 0 10px grey;
     display: grid;
     grid-gap: 0;
     grid-template-columns: 75% auto;
     align-content: center;
 }
 .sidea {
-    margin: 5px 0 30px 30px;
+    margin: 5px 0;
 }
 .sideb {
     margin: auto;
-    padding: 30px;
+    padding-top: 30px;
+}
+.sep {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+.description {
+    margin-top: 30px;
+    text-align: justify;
 }
 .dropdown-container {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: auto auto;
-    margin: auto;
+    padding-top: 5%;
 }
 .warning {
     border: 2px solid grey;

@@ -4,8 +4,8 @@
     border: 0.2em solid black;
     box-shadow: 0 0 1em grey;
 }
-.hole0 {
-    margin-bottom: 0.5em;
+.thumb-hole-sep {
+    margin: 0.5em 0;
 }
 .hole-large {
     height: 50px;

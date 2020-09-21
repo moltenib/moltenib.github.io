@@ -136,7 +136,7 @@ function on_note_above_score_mouseover(x) {
         /* Greater or equal than */
         if (!note_less(x.id, lines[i].id)) {
             lines[i].style.background
-                = "linear-gradient(to right, white 45%, black 45%, black 55%, white 55%)";
+                = "linear-gradient(to right, white 45%, black 45%, black 60%, white 60%)";
 
         } else {
             lines[i].style.background
@@ -183,7 +183,7 @@ function on_note_below_score_mouseover(x) {
 
         } else {
             lines[i].style.background
-                = "linear-gradient(to right, white 45%, black 45%, black 55%, white 55%)";
+                = "linear-gradient(to right, white 45%, black 45%, black 60%, white 60%)";
 
         }
 

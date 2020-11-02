@@ -3,6 +3,9 @@
     border-radius: 50%;
     border: 0.2em solid black;
     box-shadow: 0 0 1em grey;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
 }
 .thumb-hole-sep {
     margin: 25px 0;
@@ -11,6 +14,7 @@
     height: 50px;
     width: 50px;
     margin: 1em 0;
+    font-size: 20px;
 }
 .hole-container {
     margin-top: 1em;
@@ -19,18 +23,26 @@
     display: inline-block;
     height: 20px;
     width: 20px;
+    font-size: 12px;
 }
 #recorder {
     list-style-type: none;
     padding: 0;
     margin: auto;
 }
-#out-of-range {
-    position: absolute;
-    top: 36%;
+.tooltip {
     right: 60px;
+    position: absolute;
     display: none;
-    width: 20%;
     background-color: white;
     z-index: 12;
+}
+#hole-tooltip {
+    font-size: 16px;
+    width: 8%;
+    pointer-events: none;
+}
+#out-of-range {
+    top: 36%;
+    width: 20%;
 }

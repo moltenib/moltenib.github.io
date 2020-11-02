@@ -35,7 +35,7 @@ main {
     grid-template-columns: auto auto;
     padding-top: 5%;
 }
-.warning {
+.warning-or-tooltip {
     border: 2px solid grey;
     color: grey;
     text-align: center;

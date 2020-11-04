@@ -22,7 +22,8 @@ function get_note(note) {
             accidental == "-1"
             || (
                 key > 7
-                && KEYS[key].indexOf(line_down(note)[0]) != -1
+                && KEYS[key].indexOf(
+                    line_down(note)[0]) != -1
             )
     ) {
         return substract_semitone(n);
@@ -133,7 +134,8 @@ function draw_on_recorder(note_and_sharp) {
 
         element.style.backgroundSize = "cover";
 
-        element.style.backgroundImage = "url('svg/0b.svg')";
+        element.style.background
+                = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
         i++;
 

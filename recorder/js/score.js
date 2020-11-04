@@ -135,7 +135,7 @@ function draw_on_recorder(note_and_sharp) {
         element.style.backgroundSize = "cover";
 
         element.style.background
-                = "linear-gradient(to right, white 50%, black 50%, black 100%)";
+            = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
         i++;
 
@@ -153,7 +153,8 @@ function draw_on_recorder(note_and_sharp) {
 
         element.style.backgroundSize = "cover";
 
-        element.style.backgroundImage = "url('svg/0b.svg')";
+        element.style.background
+            = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
     }
 

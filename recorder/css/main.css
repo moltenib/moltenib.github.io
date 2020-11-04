@@ -8,6 +8,13 @@ main {
     padding-left: 60px;
     padding-bottom: 30px;
 }
+main a {
+    color: blue;
+    text-decoration: none;
+}
+main a:hover {
+    color: black;
+}
 .main-container {
     display: grid;
     grid-gap: 0;

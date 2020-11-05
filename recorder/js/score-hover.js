@@ -215,6 +215,10 @@ function on_score_mouseout(x) {
     document.getElementById(
         "accidental-flat").style.display = "none";
 
+    document.getElementById("0").style.background = "none";
+
+    document.getElementById("2").style.background = "none";
+
     document.getElementById("out-of-range").style.display = "none";
 
     var lines;

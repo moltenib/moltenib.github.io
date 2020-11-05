@@ -55,6 +55,10 @@ main a:hover {
     margin: 60px auto auto auto;
     text-align: center;
 }
+.footnote {
+    font-size: 75%;
+    font-style: italic;
+}
 @media (max-width: 300px) {
     main {
         display: none;

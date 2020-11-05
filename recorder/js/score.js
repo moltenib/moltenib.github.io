@@ -130,30 +130,18 @@ function draw_on_recorder(note_and_sharp) {
         POSITIONS[note_and_sharp[0]][note_and_sharp[1]][style_][0]
             == "0b" ) {
         /* Set background image */
-        var element = document.getElementById("0");
-
-        element.style.backgroundSize = "cover";
-
-        element.style.background
+        document.getElementById("0").style.background
             = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
         i++;
 
         j++;
 
-    } else {
-        /* Unset background image */
-        document.getElementById("0").style.backgroundImage = "none";
-
     }
 
     if (note_and_sharp[0] == "c6"
             && note_and_sharp[1] == "s") { 
-        var element = document.getElementById("2");
-
-        element.style.backgroundSize = "cover";
-
-        element.style.background
+        document.getElementById("2").style.background
             = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
     }

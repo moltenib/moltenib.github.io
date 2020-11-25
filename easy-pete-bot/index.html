@@ -45,7 +45,7 @@
             <h2 class="anchor" id="the-set-command">The <em>.Set</em> Command</h2>
             <p>What we did first on this guide was to enable server greetings, but we did not tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
             <img src="welcome.png">
-            <p>We just set the <em>welcome</em> message. We might want to also change the goodbye message sent when somebody leaves by running <em>.set farewell</em> followed by the message in question.</p>
+            <p>We just set the <em>welcome</em> message. We might also want to change the &ldquo;goodbye&rdquo; message sent when somebody leaves by running <em>.set farewell</em> followed by the message in question.</p>
             <p><em>.Set</em> can also change the way the bot replies to other commands, like <em>.iam.</em> We invite you to try it out for yourself with the help of <em>.admin</em> and our support server, linked at the bottom of this page. However, we will use <em>@someone</em> as a last example.</p>
             <img src="someone.png">
             <p>The <em>@someone</em> command mentions someone at random on the server. It can be fun for some, but annoying for others. If you prefer not having it, you can run the <em>.set</em> command as in this picture:</p>
@@ -67,8 +67,8 @@
                 The <em>.iam</em> command will let users add themselves roles. It can be affected by the following variables:</li>
                     <ul>
                         <li>The bot can only add a role that is below its own on the role list. You will need to drag Easy Pete&apos;s role above any role you intend it to assign to other users on Server Settings, Roles.</li>
-                        <li>As a user should not be able to give himself more permissions, <em>.iam</em> also requires that any role that is to be added by users should have no special permissions added to it, meaning all its permissions should be switched off on Server Settings, Roles.</li>
-                        <li><em>.Set role_create true</em> will allow Easy Pete to create a role automatically before assigning it to a user. The role will be hoisted and carry a random colour. Likewise, setting said variable to <em>false</em> will prevent this from happening, instead saying the role is not available.</li>
+                        <li>As users should not be able to give themselves more permissions, <em>.iam</em> also requires that any role that is to be added by them should have no special permissions added to it, meaning all its permissions should be switched off on Server Settings, Roles.</li>
+                        <li><em>.Set role_create true</em> will allow Easy Pete to create a role automatically before assigning it to a user. The role will be hoisted and carry a random colour; likewise, setting said variable to <em>false</em> will prevent this from happening, instead saying the role is not available.</li>
                     </ul>
                 <li><h3 id="role-clean-up">Role Clean-Up</h3>
                 <em>.Set role_cleanup true</em> will allow any roles to be deleted as soon as no users are detected to be carrying them. Because Easy Pete does not save which roles it has created, this affects any role whether it has been created by the bot or a user. It will be triggered for two reasons:

@@ -23,16 +23,16 @@
         </header>
         <nav>
             <a href="#">Introduction</a>
-            <a href="#per-channel-settings">Per-Channel Settings</a>
+            <a href="#enable-and-disable"><em>.Enable</em> and <em>.Disable</em></a>
             <a href="#the-set-command">The <em>.Set</em> Command</a>
             <a href="#features">Features</a>
             <a href="#privacy">Privacy</a>
             <a href="#more-links">More Links</a>
         </nav>
         <main>
-            <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if they are no longer owned by any users, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customised, and this guide will briefly attempt to explain how to do that.</p>
-            <p>A substantial amount of help can be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting is changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
-            <h2 class="anchor" id="per-channel-settings">Per-Channel Settings</h2>
+            <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if they are no longer owned by any users, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customised and this guide will briefly attempt to explain how to do that.</p>
+            <p>A substantial amount of help can be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
+            <h2 class="anchor" id="enable-and-disable"><em>Enable</em> and <em>Disable</em></h2>
             <p>The first step is to add the bot to a server through <a target="_blank" href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot">this link</a>. It is important that we give the bot as many permissions as it needs so that all commands may work.</p>
             <p>You can run <em>.set</em> after adding the bot to see all its settings.</p>
             <img src="set.png">
@@ -73,20 +73,20 @@
                 <li><h3 id="role-clean-up">Role Clean-Up</h3>
                 <em>.Set role_cleanup true</em> will allow any roles to be deleted as soon as no users are detected to be carrying them. Because Easy Pete does not save which roles it has created, this affects any role whether it has been created by the bot or a user. It will be triggered for two reasons:
                 <ul>
-                    <li>A role has been removed from a user, and the role is no longer used.</li>
+                    <li>A role has been removed from a user and the role is no longer used.</li>
                     <li>A user has left the server and roles are no longer used by other members.</li>
                 </ul>
-                Coupled with <em>.set role_create true,</em> this can provide a smooth way for users to add themselves new roles, and delete them when they are no longer in use.</li>
+                Coupled with <em>.set role_create true,</em> this can provide a smooth way for users to add themselves new roles and delete them when they are no longer in use.</li>
                 <li><h3 id="memes">Memes</h3>
                 The command <em>.meme</em> can be enabled by <em>.enable meme.</em> They can be submitted through <em>.meme submit.</em></li>
                 <li><h3 id="pruning-messages">&ldquo;Pruning&rdquo; Messages</h3>
-                One can remove a group of messages by running <em>.prune,</em> followed by an amount. It can be run by those having <em>Manage Messages</em> permission, and disabled by <em>.set max_deletions 0.</em></li>
+                One can remove a group of messages by running <em>.prune,</em> followed by an amount. It can be run by those having <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
                 <li><h3 id="changing-the-prefix">Changing the Prefix</h3>
                 While the default prefix is a dot <em>(.),</em> this can be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be one symbol. To check the bot&apos;s current prefix, just mention it.</li>
             </ul>
             <p>Congratulations, this is all there is to know about the bot. For a concise explanation, you can always turn to <em>.admin.</em> If you would like to suggest any changes, please create a Github Issue following the link to source code at the bottom of this page.</p>
             <h2 class="anchor" id="privacy">Privacy</h2>
-            <p>The bot does not log or save to our servers anything that isn&apos;t strictly necessary for its own function, and it will delete all information associated to a server as soon as it is removed from it. By kicking and readding the bot, you can restore all settings to their default values. Additionally, the bot&apos;s source code is available <a target="_blank" href="https://github.com/stamby/easy-pete-bot">on Github</a> so you can see exactly what it does.</p>
+            <p>The bot does not log or save to our servers anything that isn&apos;t strictly necessary for its own function and it will delete all information associated to a server as soon as it is removed from it. By kicking and readding the bot, you can restore all settings to their default values. Additionally, the bot&apos;s source code is available <a target="_blank" href="https://github.com/stamby/easy-pete-bot">on Github</a> so you can see exactly what it does.</p>
             <h2 class="anchor" id="more-links">More Links</h2>
             <p>If you like the bot, we will really appreciate that you recommend it to other people who might also enjoy it. You can also join the Discord server to hang out with other users of the bot, suggest new features and ask for help if needed.</p>
             <ul>

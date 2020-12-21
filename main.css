@@ -23,10 +23,12 @@ header {
     text-align: center;
 }
 main {
+    border-radius: 1em;
     align-content: center;
     background-color: white;
     border: 5px solid brown;
-    margin: 25% 25% auto;
+    padding: 1em;
+    margin: 10% 20% auto;
 }
 main a {
     color: blue;

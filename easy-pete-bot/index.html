@@ -45,7 +45,11 @@
             <h2 class="anchor" id="the-set-command">The <em>.Set</em> Command</h2>
             <p>What we did first on this guide was to enable server greetings, but we did not tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
             <img src="welcome.png">
-            <p>We just set the <em>welcome</em> message. We might also want to change the &ldquo;goodbye&rdquo; message sent when somebody leaves by running <em>.set farewell</em> followed by the message in question.</p>
+            <p>We just set the <em>welcome</em> message. We can also change the one sent when somebody leaves by running <em>.set farewell</em> followed by our message. For both actions, the following &ldquo;macros&rdquo; exist:</p>
+            <ul>
+                <li><strong>@@USER@@</strong>: will mention the user in question.</li>
+                <li><strong>@@TAG@@</strong>: will be replaced by the user&apos;s &ldquo;tag&rdquo;.</li>
+            </ul>
             <p><em>.Set</em> can also change the way the bot replies to other commands, like <em>.iam.</em> We invite you to try it out for yourself with the help of <em>.admin</em> and our support server, linked at the bottom of this page. However, we will use <em>@someone</em> as a last example.</p>
             <img src="someone.png">
             <p>The <em>@someone</em> command mentions someone at random on the server. It can be fun for some, but annoying for others. If you prefer not having it, you can run the <em>.set</em> command as in this picture:</p>

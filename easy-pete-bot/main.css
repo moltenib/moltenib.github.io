@@ -73,7 +73,7 @@ main p {
     text-decoration: none;
 }
 /* responsive part */
-@media (max-width: 1000px) {
+@media (max-width: 1020px) {
     nav a {
         width: 50%;
     }

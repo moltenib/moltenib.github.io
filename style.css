@@ -1,0 +1,68 @@
+/* general */
+* {
+  font-size: 20px;
+  text-align: center;
+}
+
+html {
+  background-color: #333;
+  background: url("./images/main-bg.jpg") no-repeat center center/cover;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  height: 100vh;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  margin: 5px;
+  font-size: 18px;
+  color: #f4f4f4;
+  background: #333;
+  padding: 13px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f7c08a;
+  color: #333;
+}
+
+body {
+  margin: 1rem;
+}
+
+header h1 {
+  display: inline-block;
+  padding: 10px;
+  font-size: 2rem;
+  color: #f9e4cf;
+  background-color: #333;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+main {
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #333;
+  margin: 10% 20% auto;
+  opacity: 0.8;
+  padding: 0.5em;
+}
+
+main ul {
+  list-style: none;
+}
+
+@media (max-width: 1000px) {
+  main {
+    margin: auto;
+  }
+}

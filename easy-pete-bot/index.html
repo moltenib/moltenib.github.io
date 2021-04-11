@@ -31,7 +31,7 @@
         </nav>
         <main>
             <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if they are no longer owned by any users, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customised and this guide will briefly attempt to explain how to do that.</p>
-            <p>A substantial amount of help can be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
+            <p>A substantial amount of help may be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
             <h2 class="anchor" id="enable-and-disable"><em>.Enable</em> and <em>.Disable</em></h2>
             <p>The first step is to add the bot to a server through <a target="_blank" href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot">this link</a>. It is important that we give the bot as many permissions as it needs so that all commands may work.</p>
             <p>You can run <em>.set</em> after adding the bot to see all its settings.</p>
@@ -40,7 +40,7 @@
             <img src="enable.png">
             <p>If we run <em>.set</em> again, we can check that the <em>greeting</em> feature is now enabled for this channel:</p>
             <img src="set2.png">
-            <p>In the same manner, <em>.enable</em> can be used to allow <em>.iam, .meme</em> and <em>.song</em> to work on a certain channel. We can enable the three of them at once, like the picture shows:</p>
+            <p>In the same manner, <em>.enable</em> may be used to allow <em>.iam, .meme</em> and <em>.song</em> to work on a certain channel. We can enable the three of them at once, like the picture shows:</p>
             <img src="enable2.png">
             <h2 class="anchor" id="the-set-command">The <em>.Set</em> Command</h2>
             <p>What we did first on this guide was to enable server greetings, but we did not tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
@@ -50,7 +50,7 @@
                 <li><strong>@@USER@@</strong>: will mention the user in question.</li>
                 <li><strong>@@TAG@@</strong>: will be replaced by the user&apos;s &ldquo;tag&rdquo;.</li>
             </ul>
-            <p><em>.Set</em> can also change the way the bot replies to other commands, like <em>.iam.</em> We invite you to try it out for yourself with the help of <em>.admin</em> and our support server, linked at the bottom of this page. However, we will use <em>@someone</em> as a last example.</p>
+            <p><em>.Set</em> can also change the way the bot replies to other commands, like <em>.iam.</em> We invite you to try it out by yourself with the help of <em>.admin</em> and our support server, linked at the bottom of this page. However, we will use <em>@someone</em> as a last example.</p>
             <img src="someone.png">
             <p>The <em>@someone</em> command mentions someone at random on the server. It can be fun for some, but annoying for others. If you prefer not having it, you can run the <em>.set</em> command as in this picture:</p>
             <img src="setsomeone.png">
@@ -59,7 +59,7 @@
             <p>Aside from the greeting messages described above, these are the bot&apos;s features:</p>
             <ul>
                 <li><h3 id="word-filtering">Word Filtering</h3>
-                Word filtering can be enabled through <em>.set filter_profanity, .set filter_mass_mention</em> and <em>.set filter_invite</em> followed by one of these values:
+                Word filtering may be enabled through <em>.set filter_profanity, .set filter_mass_mention</em> and <em>.set filter_invite</em> followed by one of these values:
                 <ul>
                     <li><em>1</em> to warn users without doing anything else.</li>
                     <li><em>2</em> to warn them before deleting their messages.</li>
@@ -80,17 +80,17 @@
                     <li>A role has been removed from a user and the role is no longer used.</li>
                     <li>A user has left the server and roles are no longer used by other members.</li>
                 </ul>
-                Coupled with <em>.set role_create true,</em> this can provide a smooth way for users to add themselves new roles and delete them when they are no longer in use.</li>
+                Coupled with <em>.set role_create true,</em> this provides a smooth way for users to add themselves new roles and delete them when they are no longer in use.</li>
                 <li><h3 id="memes">Memes</h3>
-                The command <em>.meme</em> can be enabled by <em>.enable meme.</em> They can be submitted through <em>.meme submit.</em></li>
+                The command <em>.meme</em> is enabled by <em>.enable meme.</em> They can be submitted through <em>.meme submit.</em></li>
                 <li><h3 id="pruning-messages">&ldquo;Pruning&rdquo; Messages</h3>
-                One can remove a group of messages by running <em>.prune,</em> followed by an amount. It can be run by those having <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
+                One may remove a group of messages by running <em>.prune,</em> followed by an amount. It may be run by those having <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
                 <li><h3 id="changing-the-prefix">Changing the Prefix</h3>
-                While the default prefix is a dot <em>(.),</em> this can be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be one symbol. To check the bot&apos;s current prefix, just mention it.</li>
+                While the default prefix is a dot <em>(.),</em> this may be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be one symbol. To check the bot&apos;s current prefix, just mention it.</li>
             </ul>
             <p>Congratulations, this is all there is to know about the bot. For a concise explanation, you can always turn to <em>.admin.</em> If you would like to suggest any changes, please create a Github Issue following the link to source code at the bottom of this page.</p>
             <h2 class="anchor" id="privacy">Privacy</h2>
-            <p>The bot does not log or save to our servers anything that isn&apos;t strictly necessary for its own function and it will delete all information associated to a server as soon as it is removed from it. By kicking and readding the bot, you can restore all settings to their default values. Additionally, the bot&apos;s source code is available <a target="_blank" href="https://github.com/stamby/easy-pete-bot">on Github</a> so you can see exactly what it does.</p>
+            <p>The bot does not log or save to our servers anything that isn&apos;t strictly necessary for its own function and it will delete all information associated to a server as soon as it is removed from it. By kicking and readding the bot, you will restore all settings to their default values. Additionally, the bot&apos;s source code is available <a target="_blank" href="https://github.com/stamby/easy-pete-bot">on Github</a> so that anyone who reads it may know what it does.</p>
             <h2 class="anchor" id="more-links">More Links</h2>
             <p>If you like the bot, we will really appreciate that you recommend it to other people who might also enjoy it. You can also join the Discord server to hang out with other users of the bot, suggest new features and ask for help if needed.</p>
             <ul>
@@ -106,4 +106,3 @@
         </main>
     </body>
 </html>
-

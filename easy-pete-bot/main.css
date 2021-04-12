@@ -1,92 +1,98 @@
 /* general */
 html {
-    background-color: #eeeef0;
-    font-family: 'Radley';
-    font-size: 110%;
-    line-height: 1.5;
-    scroll-behavior: smooth;
-    text-align: justify;
+  background-color: #eeeef0;
+  font-family: "Radley";
+  font-size: 110%;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  text-align: justify;
 }
 body {
-    margin: 1rem;
+  margin: 1rem;
 }
-h1, h2, nav {
-    text-shadow: 0 0 5px #ffffff;
+h1,
+h2,
+nav {
+  text-shadow: 0 0 5px #ffffff;
 }
 h1 {
-    font-size: 2rem;
+  font-size: 2rem;
 }
 h2 {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 .anchor {
-    margin-top: -1em;
-    padding-top: 2em;
+  margin-top: -1em;
+  padding-top: 2em;
 }
 img {
-    border: 5px solid gold;
-    display: block;
-    margin: 32px auto;
-    max-width: 100%;
+  border: 5px solid gold;
+  display: block;
+  margin: 32px auto;
+  max-width: 100%;
+}
+footer {
+  border-top: 1px dotted #333;
+  padding-top: 0.8em;
 }
 /* header and navigation menu */
 header {
-    text-align: center;
+  text-align: center;
 }
 nav {
-    list-style-type: none;
-    margin-bottom: 1rem;
-    overflow: auto;
-    position: sticky;
-    top: 1em;
-    width: 100%;
-    border-radius: 1em;
-    box-shadow: 0 0 0.5em #36393f;
-    z-index: 2;
+  list-style-type: none;
+  margin-bottom: 1rem;
+  overflow: auto;
+  position: sticky;
+  top: 1em;
+  width: 100%;
+  border-radius: 1em;
+  box-shadow: 0 0 0.5em #36393f;
+  z-index: 2;
 }
 nav a {
-    background-color: #36393f;
-    color: white;
-    float: left;
-    text-align: center;
-    text-decoration: none;
-    width: 16.6666666666%;
+  background-color: #36393f;
+  color: white;
+  float: left;
+  text-align: center;
+  text-decoration: none;
+  width: 16.6666666666%;
 }
 nav a:hover {
-    background-color: gold;
-    color: black;
+  background-color: gold;
+  color: black;
 }
 main {
-    align-content: center;
+  align-content: center;
 }
 main a {
-    color: blue;
-    text-decoration: none;
+  color: blue;
+  text-decoration: none;
 }
 main a:hover {
-    color: gold;
+  text-decoration: underline;
 }
 main p {
-    color: black;
-    overflow: auto;
-    text-align: justify;
-    text-decoration: none;
+  color: black;
+  overflow: auto;
+  text-align: justify;
+  text-decoration: none;
 }
 /* responsive part */
 @media (max-width: 1020px) {
-    nav a {
-        width: 50%;
-    }
-    .anchor {
-        margin-top: -1em;
-        padding-top: 4em;
-    }
+  nav a {
+    width: 50%;
+  }
+  .anchor {
+    margin-top: -1em;
+    padding-top: 4em;
+  }
 }
 @media (max-width: 400px) {
-    nav {
-        display: none;
-    }
-    .anchor {
-        margin-top: 3em;
-    }
+  nav {
+    display: none;
+  }
+  .anchor {
+    margin-top: 3em;
+  }
 }

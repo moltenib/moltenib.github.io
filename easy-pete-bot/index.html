@@ -1,109 +1,318 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Radley">
-        <link rel="stylesheet" href="main.css">
-        
-        <link rel="shortcut icon"
-            href="https://stamby.github.io/easy-pete-bot/favicon.ico">
+  <head>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Radley&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="shortcut icon"
+      href="https://stamby.github.io/easy-pete-bot/favicon.ico"
+    />
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="og:description" content="A quick guide to the Easy Pete Discord bot." />
-        <meta property="og:image" type="image/png" content="https://stamby.github.io/easy-pete-bot/logo.png" />
-        <meta property="og:title" content="Easy Pete Bot for Discord: Quick Guide" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://stamby.github.io/easy-pete-bot" />
-        <title>Easy Pete Bot for Discord</title>
-    </head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      property="og:description"
+      content="A quick guide to the Easy Pete Discord bot."
+    />
+    <meta
+      property="og:image"
+      type="image/png"
+      content="https://stamby.github.io/easy-pete-bot/img/logo.png"
+    />
+    <meta
+      property="og:title"
+      content="Easy Pete Bot for Discord: Quick Guide"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stamby.github.io/easy-pete-bot" />
+    <title>Easy Pete Bot for Discord</title>
+  </head>
 
-    <body>
-        <header>
-            <h1>Easy Pete Bot for Discord: Quick Guide</h1>
-        </header>
-        <nav>
-            <a href="#">Introduction</a>
-            <a href="#enable-and-disable"><em>.Enable</em> and <em>.Disable</em></a>
-            <a href="#the-set-command">The <em>.Set</em> Command</a>
-            <a href="#features">Features</a>
-            <a href="#privacy">Privacy</a>
-            <a href="#more-links">More Links</a>
-        </nav>
-        <main>
-            <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if they are no longer owned by any users, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customised and this guide will briefly attempt to explain how to do that.</p>
-            <p>A substantial amount of help can be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
-            <h2 class="anchor" id="enable-and-disable"><em>.Enable</em> and <em>.Disable</em></h2>
-            <p>The first step is to add the bot to a server through <a target="_blank" href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot">this link</a>. It is important that we give the bot as many permissions as it needs so that all commands may work.</p>
-            <p>You can run <em>.set</em> after adding the bot to see all its settings.</p>
-            <img src="set.png">
-            <p>We can see that some values at the top say <em>Disabled,</em> which are the features that can be enabled on a channel basis through the <em>.enable</em> command. At this point you can enable welcome messages by doing the following:</p>
-            <img src="enable.png">
-            <p>If we run <em>.set</em> again, we can check that the <em>greeting</em> feature is now enabled for this channel:</p>
-            <img src="set2.png">
-            <p>In the same manner, <em>.enable</em> can be used to allow <em>.iam, .meme</em> and <em>.song</em> to work on a certain channel. We can enable the three of them at once, like the picture shows:</p>
-            <img src="enable2.png">
-            <h2 class="anchor" id="the-set-command">The <em>.Set</em> Command</h2>
-            <p>What we did first on this guide was to enable server greetings, but we did not tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
-            <img src="welcome.png">
-            <p>We just set the <em>welcome</em> message. We can also change the one sent when somebody leaves by running <em>.set farewell</em> followed by our message. For both actions, the following &ldquo;macros&rdquo; exist:</p>
-            <ul>
-                <li><strong>@@USER@@</strong>: will mention the user in question.</li>
-                <li><strong>@@TAG@@</strong>: will be replaced by the user&apos;s &ldquo;tag&rdquo;.</li>
-            </ul>
-            <p><em>.Set</em> can also change the way the bot replies to other commands, like <em>.iam.</em> We invite you to try it out for yourself with the help of <em>.admin</em> and our support server, linked at the bottom of this page. However, we will use <em>@someone</em> as a last example.</p>
-            <img src="someone.png">
-            <p>The <em>@someone</em> command mentions someone at random on the server. It can be fun for some, but annoying for others. If you prefer not having it, you can run the <em>.set</em> command as in this picture:</p>
-            <img src="setsomeone.png">
-            <p>Indeed, the second time there was no reply. This is the way to turn it off.</p>
-            <h2 class="anchor" id="features">Features</h2>
-            <p>Aside from the greeting messages described above, these are the bot&apos;s features:</p>
-            <ul>
-                <li><h3 id="word-filtering">Word Filtering</h3>
-                Word filtering can be enabled through <em>.set filter_profanity, .set filter_mass_mention</em> and <em>.set filter_invite</em> followed by one of these values:
-                <ul>
-                    <li><em>1</em> to warn users without doing anything else.</li>
-                    <li><em>2</em> to warn them before deleting their messages.</li>
-                    <li><em>3</em> to delete their messages without warning.</li>
-                    <li>The default value of <em>0</em> does nothing.</li>
-                </ul>
-                </li>
-                <li><h3 id="role-self-assignment">Role Self-Assigment</h3>
-                The <em>.iam</em> command will let users add themselves roles. It can be affected by the following variables:</li>
-                    <ul>
-                        <li>The bot can only add a role that is below its own on the role list. You will need to drag Easy Pete&apos;s role above any role you intend it to assign to other users on Server Settings, Roles.</li>
-                        <li>As users should not be able to give themselves more permissions, <em>.iam</em> also requires that any role that is to be added by them should have no special permissions added to it, meaning all its permissions should be switched off on Server Settings, Roles.</li>
-                        <li><em>.Set role_create true</em> will allow Easy Pete to create a role automatically before assigning it to a user. The role will be hoisted and carry a random colour; likewise, setting said variable to <em>false</em> will prevent this from happening, instead saying the role is not available.</li>
-                    </ul>
-                <li><h3 id="role-clean-up">Role Clean-Up</h3>
-                <em>.Set role_cleanup true</em> will allow any roles to be deleted as soon as no users are detected to be carrying them. Because Easy Pete does not save which roles it has created, this affects any role whether it has been created by the bot or a user. It will be triggered for two reasons:
-                <ul>
-                    <li>A role has been removed from a user and the role is no longer used.</li>
-                    <li>A user has left the server and roles are no longer used by other members.</li>
-                </ul>
-                Coupled with <em>.set role_create true,</em> this can provide a smooth way for users to add themselves new roles and delete them when they are no longer in use.</li>
-                <li><h3 id="memes">Memes</h3>
-                The command <em>.meme</em> can be enabled by <em>.enable meme.</em> They can be submitted through <em>.meme submit.</em></li>
-                <li><h3 id="pruning-messages">&ldquo;Pruning&rdquo; Messages</h3>
-                One can remove a group of messages by running <em>.prune,</em> followed by an amount. It can be run by those having <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
-                <li><h3 id="changing-the-prefix">Changing the Prefix</h3>
-                While the default prefix is a dot <em>(.),</em> this can be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be one symbol. To check the bot&apos;s current prefix, just mention it.</li>
-            </ul>
-            <p>Congratulations, this is all there is to know about the bot. For a concise explanation, you can always turn to <em>.admin.</em> If you would like to suggest any changes, please create a Github Issue following the link to source code at the bottom of this page.</p>
-            <h2 class="anchor" id="privacy">Privacy</h2>
-            <p>The bot does not log or save to our servers anything that isn&apos;t strictly necessary for its own function and it will delete all information associated to a server as soon as it is removed from it. By kicking and readding the bot, you can restore all settings to their default values. Additionally, the bot&apos;s source code is available <a target="_blank" href="https://github.com/stamby/easy-pete-bot">on Github</a> so you can see exactly what it does.</p>
-            <h2 class="anchor" id="more-links">More Links</h2>
-            <p>If you like the bot, we will really appreciate that you recommend it to other people who might also enjoy it. You can also join the Discord server to hang out with other users of the bot, suggest new features and ask for help if needed.</p>
-            <ul>
-                <li><a target="_blank" href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot">Add to Discord</a></li>
-                <li><a target="_blank" href="https://github.com/stamby/easy-pete-bot">Source code</a></li>
-                <li><a target="_blank" href="https://top.gg/bot/700307494580256768">Like the bot on <em>top.gg</em></a></li>
-                <li><a target="_blank" href="https://discord.gg/shvcbR2">Join our community</a></li>
-            </ul>
-            <h3 id="donating">Donating</h3>
-            <p>Running the bot costs USD 5 a month and some coding. While this isn&apos;t much, a donation will be highly appreciated. If you wish to donate, you can do so by following <a target="_blank" href="https://donatebot.io/checkout/716171149440057394">this link</a>.</p>
-            <hr>
-            <p>&copy; MMXX by the author. Made in Argentina. Hecho en la Argentina. No hay todavía una traducción al castellano.</p>
-        </main>
-    </body>
+  <body>
+    <header>
+      <h1>Easy Pete Bot for Discord: Quick Guide</h1>
+    </header>
+    <nav>
+      <a href="#">Introduction</a>
+      <a href="#enable-and-disable"><i>.Enable</i> and <i>.Disable</i></a>
+      <a href="#the-set-command">The <i>.Set</i> Command</a>
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#more-links">More Links</a>
+    </nav>
+    <main>
+      <div class="introduction">
+        <p>
+          Easy Pete is a simple, multi-purpose Discord bot that can greet users
+          when they join a server, create roles on request and remove those roles
+          if they are no longer owned by any users, depending on settings. It has
+          the ability to delete a group of messages with a command and other
+          features for entertainment, as well as a word filter. All its features
+          can be customised and this guide will briefly attempt to explain how to
+          do that.
+        </p>
+        <p>
+          A substantial amount of help can be found through
+          <i>.help,</i> the help for users in general, and
+          <i>.admin,</i> for people who manage a server. In addition, every
+          setting and the prefix are changed by two commands:
+          <i>.enable</i> and <i>.set.</i> Learning how to use these
+          commands is all that is needed to make all the bot&apos;s features to
+          your preference.
+        </p>
+      </div>
+
+      <h2 class="anchor" id="enable-and-disable">
+        <i>.Enable</i> and <i>.Disable</i>
+      </h2>
+
+      <p>
+        The first step is to add the bot to a server through
+        <a
+          target="_blank"
+          href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot"
+          >this link</a
+        >. It is important that we give the bot as many permissions as it needs
+        so that all commands may work.
+      </p>
+
+      <p>
+        You can run <i>.set</i> after adding the bot to see all its settings.
+      </p>
+      <img src="img/set.png" />
+
+      <p>
+        We can see that some values at the top say <i>Disabled,</i> which are
+        the features that can be enabled on a channel basis through the
+        <i>.enable</i> command. At this point you can enable welcome messages
+        by doing the following:
+      </p>
+
+      <img src="img/enable.png" />
+      <p>
+        If we run <i>.set</i> again, we can check that the
+        <i>greeting</i> feature is now enabled for this channel:
+      </p>
+
+      <img src="img/set2.png" />
+      <p>
+        In the same manner, <i>.enable</i> can be used to allow
+        <i>.iam, .meme</i> and <i>.song</i> to work on a certain channel. We
+        can enable the three of them at once, like the picture shows:
+      </p>
+
+      <img src="img/enable2.png" />
+      
+      <h2 class="anchor" id="the-set-command">The <i>.Set</i> Command</h2>
+
+      <p>
+        What we did first on this guide was to enable server greetings, but we
+        did not tell the bot what message it should say whenever somebody joins
+        the server. Therefore the message will be the default one. If we want to
+        change this greeting, <i>.set</i> comes into play:
+      </p>
+
+      <img src="img/welcome.png" />
+      <p>
+        We just set the <i>welcome</i> message. We can also change the one
+        sent when somebody leaves by running <i>.set farewell</i> followed by
+        our message. For both actions, the following &ldquo;macros&rdquo; exist:
+      </p>
+
+      <ul>
+        <li><strong>@@USER@@</strong>: will mention the user in question.</li>
+        <li>
+          <strong>@@TAG@@</strong>: will be replaced by the user&apos;s
+          &ldquo;tag&rdquo;.
+        </li>
+      </ul>
+
+      <p>
+        <i>.Set</i> can also change the way the bot replies to other commands,
+        like <i>.iam.</i> We invite you to try it out for yourself with the
+        help of <i>.admin</i> and our support server, linked at the bottom of
+        this page. However, we will use <i>@someone</i> as a last example.
+      </p>
+
+      <img src="img/someone.png" />
+      <p>
+        The <i>@someone</i> command mentions someone at random on the server.
+        It can be fun for some, but annoying for others. If you prefer not
+        having it, you can run the <i>.set</i> command as in this picture:
+      </p>
+
+      <img src="img/setsomeone.png" />
+
+      <p>
+        Indeed, the second time there was no reply. This is the way to turn it
+        off.
+      </p>
+
+      <h2 class="anchor" id="features">Features</h2>
+
+      <p>
+        Aside from the greeting messages described above, these are the
+        bot&apos;s features:
+      </p>
+
+      <ul>
+        <li>
+          <h3 id="word-filtering">Word Filtering</h3>
+          Word filtering can be enabled through
+          <i>.set filter_profanity, .set filter_mass_mention</i> and
+          <i>.set filter_invite</i> followed by one of these values:
+          <ul>
+            <li><i>1</i> to warn users without doing anything else.</li>
+            <li><i>2</i> to warn them before deleting their messages.</li>
+            <li><i>3</i> to delete their messages without warning.</li>
+            <li>The default value of <i>0</i> does nothing.</li>
+          </ul>
+        </li>
+        <li>
+          <h3 id="role-self-assignment">Role Self-Assigment</h3>
+          The <i>.iam</i> command will let users add themselves roles. It can
+          be affected by the following variables:
+        </li>
+
+        <ul>
+          <li>
+            The bot can only add a role that is below its own on the role list.
+            You will need to drag Easy Pete&apos;s role above any role you
+            intend it to assign to other users on Server Settings, Roles.
+          </li>
+
+          <li>
+            As users should not be able to give themselves more permissions,
+            <i>.iam</i> also requires that any role that is to be added by
+            them should have no special permissions added to it, meaning all its
+            permissions should be switched off on Server Settings, Roles.
+          </li>
+
+          <li>
+            <i>.Set role_create true</i> will allow Easy Pete to create a role
+            automatically before assigning it to a user. The role will be
+            hoisted and carry a random colour; likewise, setting said variable
+            to <i>false</i> will prevent this from happening, instead saying
+            the role is not available.
+          </li>
+        </ul>
+        <li>
+          <h3 id="role-clean-up">Role Clean-Up</h3>
+          <i>.Set role_cleanup true</i> will allow any roles to be deleted as
+          soon as no users are detected to be carrying them. Because Easy Pete
+          does not save which roles it has created, this affects any role
+          whether it has been created by the bot or a user. It will be triggered
+          for two reasons:
+          <ul>
+            <li>
+              A role has been removed from a user and the role is no longer
+              used.
+            </li>
+            <li>
+              A user has left the server and roles are no longer used by other
+              members.
+            </li>
+          </ul>
+          Coupled with <i>.set role_create true,</i> this can provide a smooth
+          way for users to add themselves new roles and delete them when they
+          are no longer in use.
+        </li>
+        <li>
+          <h3 id="memes">Memes</h3>
+          The command <i>.meme</i> can be enabled by
+          <i>.enable meme.</i> They can be submitted through
+          <i>.meme submit.</i>
+        </li>
+        <li>
+          <h3 id="pruning-messages">&ldquo;Pruning&rdquo; Messages</h3>
+          One can remove a group of messages by running
+          <i>.prune,</i> followed by an amount. It can be run by those having
+          <i>Manage Messages</i> permission and disabled by
+          <i>.set max_deletions 0.</i>
+        </li>
+        <li>
+          <h3 id="changing-the-prefix">Changing the Prefix</h3>
+          While the default prefix is a dot <i>(.),</i> this can be changed to
+          any prefix of your choice. To do this, run
+          <i>.set prefix</i> followed by the prefix to use. It must be one
+          symbol. To check the bot&apos;s current prefix, just mention it.
+        </li>
+      </ul>
+
+      <p>
+        Congratulations, this is all there is to know about the bot. For a
+        concise explanation, you can always turn to <i>.admin.</i> If you
+        would like to suggest any changes, please create a Github Issue
+        following the link to source code at the bottom of this page.
+      </p>
+
+      <h2 class="anchor" id="privacy">Privacy</h2>
+
+      <p>
+        The bot does not log or save to our servers anything that isn&apos;t
+        strictly necessary for its own function and it will delete all
+        information associated to a server as soon as it is removed from it. By
+        kicking and readding the bot, you can restore all settings to their
+        default values. Additionally, the bot&apos;s source code is available
+        <a target="_blank" href="https://github.com/stamby/easy-pete-bot"
+          >on Github</a
+        >
+        so you can see exactly what it does.
+      </p>
+
+      <h2 class="anchor" id="more-links">More Links</h2>
+
+      <p>
+        If you like the bot, we will really appreciate that you recommend it to
+        other people who might also enjoy it. You can also join the Discord
+        server to hang out with other users of the bot, suggest new features and
+        ask for help if needed.
+      </p>
+
+      <ul>
+        <li>
+          <a
+            target="_blank"
+            href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot"
+            >Add to Discord</a
+          >
+        </li>
+        <li>
+          <a target="_blank" href="https://github.com/stamby/easy-pete-bot"
+            >Source code</a
+          >
+        </li>
+        <li>
+          <a target="_blank" href="https://top.gg/bot/700307494580256768"
+            >Like the bot on <i>top.gg</i></a
+          >
+        </li>
+        <li>
+          <a target="_blank" href="https://discord.gg/shvcbR2"
+            >Join our community</a
+          >
+        </li>
+      </ul>
+      <h3 id="donating">Donating</h3>
+
+      <p>
+        Running the bot costs &dollar;5 USD a month and some time coding. While this
+        isn&apos;t much, a donation will be highly appreciated. If you wish to
+        donate, you can do so by following
+        <a
+          target="_blank"
+          href="https://donatebot.io/checkout/716171149440057394"
+          >this link</a
+        >.
+      </p>
+    </main>
+    <footer>
+      &copy; MMXX by the author. Made in Argentina. Hecho en la Argentina. No
+      hay todavía una traducción al castellano.
+    </footer>
+  </body>
 </html>
-

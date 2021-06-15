@@ -31,22 +31,22 @@
             <a href="#more-links">More Links</a>
         </nav>
         <main>
-            <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if they are no longer owned by any users, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customised and this guide will briefly attempt to explain how to do that.</p>
-            <p>A substantial amount of help may be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
+            <p>Easy Pete is a simple, multi-purpose Discord bot that can greet users when they join a server, create roles on request and remove those roles if no one has them, depending on settings. It has the ability to delete a group of messages with a command and other features for entertainment, as well as a word filter. All its features can be customized and this guide will briefly attempt to explain how to do that.</p>
+            <p>A substantial amount of help can be found through <em>.help,</em> the help for users in general, and <em>.admin,</em> for people who manage a server. In addition, every setting and the prefix are changed by two commands: <em>.enable</em> and <em>.set.</em> Learning how to use these commands is all that is needed to make all the bot&apos;s features to your preference.</p>
             <h2 class="anchor" id="enable-and-disable"><em>.Enable</em> and <em>.Disable</em></h2>
             <p>The first step is to add the bot to a server through <a target="_blank" href="https://discord.com/oauth2/authorize?client_id=700307494580256768&permissions=268561408&scope=bot">this link</a>. It is important that we give the bot as many permissions as it needs so that all commands may work.</p>
             <p>You can run <em>.set</em> after adding the bot to see all its settings.</p>
             <img src="set.png">
-            <p>We can see that some values at the top say <em>Disabled,</em> which are the features that can be enabled on a channel basis through the <em>.enable</em> command. At this point you can enable welcome messages by doing the following:</p>
+            <p>We notice that some values at the top say <em>Disabled,</em> which are the features that can be enabled on a channel basis through the <em>.enable</em> command. At this point you can enable welcome messages by writing the following:</p>
             <img src="enable.png">
-            <p>If we run <em>.set</em> again, we can check that the <em>greeting</em> feature is now enabled for this channel:</p>
+            <p>If we run <em>.set</em> again, it lets us check that the <em>greeting</em> feature is now enabled for this channel:</p>
             <img src="set2.png">
-            <p>In the same manner, <em>.enable</em> may be used to allow <em>.iam, .meme</em> and <em>.song</em> to work on a certain channel. We can enable the three of them at once, like the picture shows:</p>
+            <p>In the same manner, <em>.enable</em> may be used to allow <em>.iam, .meme</em> and <em>.song</em> to work on a certain channel. The three of them can be enabled at once, like the picture shows:</p>
             <img src="enable2.png">
             <h2 class="anchor" id="the-set-command">The <em>.Set</em> Command</h2>
-            <p>What we did first on this guide was to enable server greetings, but we did not tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
+            <p>What we did first on this guide was to enable server greetings, but we didn&apos;t tell the bot what message it should say whenever somebody joins the server. Therefore the message will be the default one. If we want to change this greeting, <em>.set</em> comes into play:</p>
             <img src="welcome.png">
-            <p>We just set the <em>welcome</em> message. We can also change the one sent when somebody leaves by running <em>.set farewell</em> followed by our message. For both actions, the following &ldquo;macros&rdquo; exist:</p>
+            <p>We just set the <em>welcome</em> message. We can also change the one sent when somebody leaves by running <em>.set farewell</em> followed by it. For both actions, the following &ldquo;macros&rdquo; exist:</p>
             <ul>
                 <li><strong>@@USER@@</strong>: will mention the user in question.</li>
                 <li><strong>@@TAG@@</strong>: will be replaced by the user&apos;s &ldquo;tag&rdquo;.</li>
@@ -60,7 +60,7 @@
             <p>Aside from the greeting messages described above, these are the bot&apos;s features:</p>
             <ul>
                 <li><h3 id="word-filtering">Word Filtering</h3>
-                Word filtering may be enabled through <em>.set filter_profanity, .set filter_mass_mention</em> and <em>.set filter_invite</em> followed by one of these values:
+                Word filtering is enabled through <em>.set filter_profanity, .set filter_mass_mention</em> and <em>.set filter_invite</em> followed by one of these values:
                 <ul>
                     <li><em>1</em> to warn users without doing anything else.</li>
                     <li><em>2</em> to warn them before deleting their messages.</li>
@@ -69,7 +69,7 @@
                 </ul>
                 </li>
                 <li><h3 id="role-self-assignment">Role Self-Assigment</h3>
-                The <em>.iam</em> command will let users add themselves roles. It can be affected by the following variables:</li>
+                The <em>.iam</em> command will let the server members add themselves roles. It is affected by the following variables:</li>
                     <ul>
                         <li>The bot can only add a role that is below its own on the role list. You will need to drag Easy Pete&apos;s role above any role you intend it to assign to other users on Server Settings, Roles.</li>
                         <li>As users should not be able to give themselves more permissions, <em>.iam</em> also requires that any role that is to be added by them should have no special permissions added to it, meaning all its permissions should be switched off on Server Settings, Roles.</li>
@@ -79,15 +79,15 @@
                 <em>.Set role_cleanup true</em> will allow any roles to be deleted as soon as no users are detected to be carrying them. Because Easy Pete does not save which roles it has created, this affects any role whether it has been created by the bot or a user. It will be triggered for two reasons:
                 <ul>
                     <li>A role has been removed from a user and the role is no longer used.</li>
-                    <li>A user has left the server and roles are no longer used by other members.</li>
+                    <li>Somebody&apos;s roles were left unused after leaving the server.</li>
                 </ul>
-                Coupled with <em>.set role_create true,</em> this provides a smooth way for users to add themselves new roles and delete them when they are no longer in use.</li>
+                Coupled with <em>.set role_create true,</em> this gives us a smooth way so that users can add themselves new roles and delete them when they are no longer in use, without the intervention of a moderator.</li>
                 <li><h3 id="memes">Memes</h3>
-                The command <em>.meme</em> is enabled by <em>.enable meme.</em> They can be submitted through <em>.meme submit.</em></li>
+                The command <em>.meme</em> is enabled by <em>.enable meme.</em> Memes can be submitted to the local database through <em>.meme submit.</em></li>
                 <li><h3 id="pruning-messages">&ldquo;Pruning&rdquo; Messages</h3>
-                One may remove a group of messages by running <em>.prune,</em> followed by an amount. It may be run by those having <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
+                One can remove a group of messages by running <em>.prune,</em> followed by an amount. The command may be run by those having the <em>Manage Messages</em> permission and disabled by <em>.set max_deletions 0.</em></li>
                 <li><h3 id="changing-the-prefix">Changing the Prefix</h3>
-                While the default prefix is a dot <em>(.),</em> this may be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be one symbol. To check the bot&apos;s current prefix, just mention it.</li>
+                While the default prefix is a dot <em>(.),</em> this can be changed to any prefix of your choice. To do this, run <em>.set prefix</em> followed by the prefix to use. It must be a single character. To check the bot&apos;s current prefix, simply mention it.</li>
             </ul>
             <p>Congratulations, this is all there is to know about the bot. For a concise explanation, you can always turn to <em>.admin.</em> If you would like to suggest any changes, please create a Github Issue following the link to source code at the bottom of this page.</p>
             <h2 class="anchor" id="privacy">Privacy</h2>
@@ -102,8 +102,6 @@
             </ul>
             <h3 id="donating">Donating</h3>
             <p>Running the bot costs USD 5 a month and some coding. While this isn&apos;t much, a donation will be highly appreciated. If you wish to donate, you can do so by following <a target="_blank" href="https://donatebot.io/checkout/716171149440057394">this link</a>.</p>
-            <hr>
-            <p>&copy; MMXX by the author. Made in Argentina. Hecho en la Argentina. No hay todavía una traducción al castellano.</p>
         </main>
     </body>
 </html>

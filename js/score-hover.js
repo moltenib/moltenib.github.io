@@ -87,43 +87,67 @@ function display_accidental(crotchet, line) {
 }
 
 function display_crotchet_stem_down(line) {
-    document.getElementById("crotchet-stem-up").style.display = "none";
+    const crotchet_up = document.getElementById("crotchet-stem-up");
+    crotchet_up.style.opacity = "0";
 
     /* Display the crotchet */
     const crotchet = document.getElementById("crotchet-stem-down");
 
-    crotchet.style.marginLeft =
+    const x =
         line.offsetWidth / 2
-        - crotchet.width / 2
-        + "px";
+        - crotchet.width / 2;
 
-    crotchet.style.marginTop =
+    const y =
         line.offsetHeight / 2
-        + line.offsetTop - 18
-        + "px";
+        + line.offsetTop - 18;
 
-    crotchet.style.display = "block";
+    const transform = "translate(" + x + "px, " + y + "px)";
+
+    if (crotchet.dataset.hasPositioned != "1") {
+        crotchet.style.transition = "none";
+        crotchet.style.transform = transform;
+        crotchet.style.opacity = "1";
+        crotchet.dataset.hasPositioned = "1";
+        requestAnimationFrame(function () {
+            crotchet.style.transition = "";
+        });
+    } else {
+        crotchet.style.transform = transform;
+        crotchet.style.opacity = "1";
+    }
 
     display_accidental(crotchet, line);
 
 }
 
 function display_crotchet_stem_up(line) {
-    document.getElementById("crotchet-stem-down").style.display = "none";
+    const crotchet_down = document.getElementById("crotchet-stem-down");
+    crotchet_down.style.opacity = "0";
 
     const crotchet = document.getElementById("crotchet-stem-up");
 
-    crotchet.style.marginLeft =
+    const x =
         line.offsetWidth / 2
-        - crotchet.width / 2
-        + "px";
+        - crotchet.width / 2;
 
-    crotchet.style.marginTop =
+    const y =
         line.offsetHeight / 2
-        + line.offsetTop - 70
-        + "px";
+        + line.offsetTop - 70;
 
-    crotchet.style.display = "block";
+    const transform = "translate(" + x + "px, " + y + "px)";
+
+    if (crotchet.dataset.hasPositioned != "1") {
+        crotchet.style.transition = "none";
+        crotchet.style.transform = transform;
+        crotchet.style.opacity = "1";
+        crotchet.dataset.hasPositioned = "1";
+        requestAnimationFrame(function () {
+            crotchet.style.transition = "";
+        });
+    } else {
+        crotchet.style.transform = transform;
+        crotchet.style.opacity = "1";
+    }
 
     display_accidental(crotchet, line);
 
@@ -209,10 +233,10 @@ export function on_score_mouseout(x) {
     );
 
     document.getElementById(
-        "crotchet-stem-down").style.display = "none";
+        "crotchet-stem-down").style.opacity = "0";
 
     document.getElementById(
-        "crotchet-stem-up").style.display = "none";
+        "crotchet-stem-up").style.opacity = "0";
 
     document.getElementById(
         "accidental-sharp").style.display = "none";

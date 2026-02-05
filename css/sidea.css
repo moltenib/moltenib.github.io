@@ -156,8 +156,11 @@
     margin-left: 207px;
 }
 .crotchet {
-    display: none;
     width: 55px;
+    opacity: 0;
+    transform: translate(0, 0);
+    transition: transform 140ms ease, opacity 120ms ease;
+    will-change: transform, opacity;
 }
 .accidental {
     display: none;

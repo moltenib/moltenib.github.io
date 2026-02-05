@@ -5,22 +5,32 @@ export function on_hole_mouseover(x) {
 
     const element = document.getElementById("hole-tooltip");
     const recorder = document.getElementById("recorder");
+    const recorder_rect = recorder.getBoundingClientRect();
+    const hole_rect = x.getBoundingClientRect();
 
     element.textContent = HOLE_TOOLTIPS[x.id];
+    element.style.width = "";
+    element.style.right = "auto";
+    element.style.display = "block";
 
-    element.style.width = (recorder.offsetWidth + 10) + "px";
+    const tooltip_rect = element.getBoundingClientRect();
+    const recorder_center_x = recorder_rect.left + recorder_rect.width / 2;
+    const hole_center_y = hole_rect.top + hole_rect.height / 2;
 
     element.style.left =
-        recorder.offsetLeft
-        - recorder.offsetWidth / 2
+        Math.round(
+            window.scrollX
+            + recorder_center_x
+            - tooltip_rect.width / 2
+        )
         + "px";
-
     element.style.top =
-        x.offsetTop
-        + x.offsetHeight / 3.5
+        Math.round(
+            window.scrollY
+            + hole_center_y
+            - tooltip_rect.height / 2
+        )
         + "px";
-
-    element.style.display = "block";
 
 }
 

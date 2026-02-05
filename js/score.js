@@ -2,7 +2,7 @@
 function get_note(note) {
     var n = note;
 
-    if (clef == "f") {
+    if (ctx.clef == "f") {
         /* This will turn, for example, `d5' into `f3' */
         n = lines_up(
             add_octaves(n, -2), 2);
@@ -10,19 +10,19 @@ function get_note(note) {
     }
 
     if (
-            accidental == "1"
+            ctx.accidental == "1"
             || (
-                key < 7
-                && KEYS[key].indexOf(n[0]) != -1
+                ctx.key < 7
+                && KEYS[ctx.key].indexOf(n[0]) != -1
             )
     ) {
         return add_semitone(n);
 
     } else if (
-            accidental == "-1"
+            ctx.accidental == "-1"
             || (
-                key > 7
-                && KEYS[key].indexOf(
+                ctx.key > 7
+                && KEYS[ctx.key].indexOf(
                     line_down(note)[0]) != -1
             )
     ) {
@@ -71,7 +71,7 @@ function note_and_sharp_to_soprano(note_and_sharp) {
 function note_and_sharp_to_bass(note_and_sharp) {
     note_and_sharp = note_and_sharp_to_alto(note_and_sharp);
 
-    var raise_by = (as_written == "t" ? 1 : 2);
+    var raise_by = (ctx.as_written == "t" ? 1 : 2);
 
     return [
         add_octaves(note_and_sharp[0], raise_by),
@@ -81,15 +81,15 @@ function note_and_sharp_to_bass(note_and_sharp) {
 
 /* Main drawing function, takes the notes played by a tenor recorder */
 function draw_on_recorder(note_and_sharp) {
-    if (size == "1" && as_written == "t") {
+    if (ctx.size == "1" && ctx.as_written == "t") {
         note_and_sharp = note_and_sharp_to_soprano(
             note_and_sharp);
 
-    } else if (size == "2") {
+    } else if (ctx.size == "2") {
         note_and_sharp = note_and_sharp_to_alto(
             note_and_sharp);
 
-    } else if (size == "4") {
+    } else if (ctx.size == "4") {
         note_and_sharp = note_and_sharp_to_bass(
             note_and_sharp);
 
@@ -120,7 +120,7 @@ function draw_on_recorder(note_and_sharp) {
     }
 
     /* Use German fingering when Baroque is not available */
-    var style_ = (position[style] ? style : "g");
+    var style_ = (position[ctx.style] ? ctx.style : "g");
 
     if (!position[style_]) {
         document.getElementById("out-of-range").style.display = "block";

@@ -3,20 +3,20 @@ function display_accidental(crotchet, line) {
 
     if (
             /* If the accidental is sharp */
-            accidental == "1"
+            ctx.accidental == "1"
             && (
-                key < 7
+                ctx.key < 7
                 && (
                     (
-                        clef == "g"
+                        ctx.clef == "g"
                         /* The current key does not make this a sharp */
-                        && KEYS[key].indexOf(line.id[0]) == -1
+                        && KEYS[ctx.key].indexOf(line.id[0]) == -1
                     ) || (
-                        clef == "f"
-                        && KEYS[key].indexOf(
+                        ctx.clef == "f"
+                        && KEYS[ctx.key].indexOf(
                             lines_up(line.id, 3)[0]) == -1
                     )
-                ) || key >= 7
+                ) || ctx.key >= 7
             )
     ) {
         /* Hide the flat accidental */
@@ -28,21 +28,21 @@ function display_accidental(crotchet, line) {
 
     } else if (
             /* Flat is selected */
-            accidental == "-1"
+            ctx.accidental == "-1"
             && (
-                key > 7
+                ctx.key > 7
                 && (
                     (
-                        clef == "g"
+                        ctx.clef == "g"
                         /* The current key does not make this a flat */
-                        && KEYS[key].indexOf(
+                        && KEYS[ctx.key].indexOf(
                             line_down(line.id)[0]) == -1
                     ) || (
-                        clef == "f"
-                        && KEYS[key].indexOf(
+                        ctx.clef == "f"
+                        && KEYS[ctx.key].indexOf(
                             line_up(line.id)[0]) == -1
                     )
-                ) || key <= 7
+                ) || ctx.key <= 7
             )
     ) {
         /* Hide sharp */
@@ -237,4 +237,3 @@ function on_score_mouseout(x) {
     );
 
 }
-

@@ -6,7 +6,7 @@ function on_hole_mouseover(x) {
 
     element.textContent = HOLE_TOOLTIPS[x.id];
 
-    element.width = recorder.offsetWidth + 10;
+    element.style.width = (recorder.offsetWidth + 10) + "px";
 
     element.style.left =
         recorder.offsetLeft

@@ -110,6 +110,11 @@ function draw_on_recorder(note_and_sharp) {
     if (note_out_of_range(note_and_sharp)) {
         /* Out of range */
         document.getElementById("out-of-range").style.display = "block";
+        /* Clear any previous fingering */
+        for (var i = 0; i < HOLES.length; i++) {
+            document.getElementById(HOLES[i]).style.background = "none";
+            document.getElementById(HOLES[i]).style.backgroundColor = "white";
+        }
 
         return;
 
@@ -125,6 +130,10 @@ function draw_on_recorder(note_and_sharp) {
     var i = 0;
 
     var j = 0;
+
+    /* Clear any previous half-hole gradients */
+    document.getElementById("0").style.background = "none";
+    document.getElementById("2").style.background = "none";
 
     if (
         POSITIONS[note_and_sharp[0]][note_and_sharp[1]][style_][0]
@@ -163,4 +172,3 @@ function draw_on_recorder(note_and_sharp) {
 
     }
 }
-

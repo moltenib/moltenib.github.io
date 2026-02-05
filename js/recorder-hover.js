@@ -1,4 +1,6 @@
-function on_hole_mouseover(x) {
+import { HOLE_TOOLTIPS } from "./hole-tooltips.js";
+
+export function on_hole_mouseover(x) {
     x.style.backgroundColor = "black";
 
     const element = document.getElementById("hole-tooltip");
@@ -22,7 +24,7 @@ function on_hole_mouseover(x) {
 
 }
 
-function on_hole_mouseout(x) {
+export function on_hole_mouseout(x) {
     x.style.backgroundColor = "white";
 
     document.getElementById("hole-tooltip").style.display = "none";

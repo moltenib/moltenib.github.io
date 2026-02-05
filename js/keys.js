@@ -1,5 +1,5 @@
 /* Notes that are sharp in each scale */
-const KEYS = [
+export const KEYS = [
     /* C# major / A# minor */
     ["a", "b", "c", "d", "e", "f", "g"],
     /* F# major / D# minor */
@@ -30,4 +30,4 @@ const KEYS = [
     ["f", "g", "a", "b", "c", "d"],
     /* Cb major / Ab minor */
     ["e", "f", "g", "a", "b", "c", "d"]
-]
+];

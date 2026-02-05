@@ -1,5 +1,18 @@
+import { ctx, HOLES } from "./variables.js";
+import { KEYS } from "./keys.js";
+import { POSITIONS } from "./positions.js";
+import {
+    lines_up,
+    line_down,
+    lines_down,
+    add_octaves,
+    add_semitone,
+    substract_semitone,
+    note_and_sharp_to_index
+} from "./note-operations.js";
+
 /* The fingering that should be used on a C recorder */
-function get_note(note) {
+export function get_note(note) {
     let n = note;
 
     if (ctx.clef == "f") {
@@ -80,7 +93,7 @@ function note_and_sharp_to_bass(note_and_sharp) {
 }
 
 /* Main drawing function, takes the notes played by a tenor recorder */
-function draw_on_recorder(note_and_sharp) {
+export function draw_on_recorder(note_and_sharp) {
     if (ctx.size == "1" && ctx.as_written == "t") {
         note_and_sharp = note_and_sharp_to_soprano(
             note_and_sharp);

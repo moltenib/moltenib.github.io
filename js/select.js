@@ -1,3 +1,5 @@
+import { ctx } from "./variables.js";
+
 let key_signature_cache = null;
 
 function get_key_signature_cache() {
@@ -32,20 +34,20 @@ function get_key_signature_cache() {
     return key_signature_cache;
 }
 
-function select_style(value) {
+export function select_style(value) {
     /* German or Baroque */
     ctx.style = value;
 }
 
-function select_accidental(value) {
+export function select_accidental(value) {
     ctx.accidental = value;
 }
 
-function select_as_written(value) {
+export function select_as_written(value) {
     ctx.as_written = value;
 }
 
-function select_key(value) {
+export function select_key(value) {
     ctx.key = parseInt(value);
 
     const cache = get_key_signature_cache();
@@ -88,7 +90,7 @@ function select_key(value) {
 
 }
 
-function select_clef(value) {
+export function select_clef(value) {
     /* Set the new value of the clef */
     ctx.clef = value;
 
@@ -122,7 +124,7 @@ function select_clef(value) {
 
 }
 
-function select_size(value) {
+export function select_size(value) {
     ctx.size = value;
 
     const clef_value = (value == "4" ? "f" : "g");

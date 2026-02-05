@@ -1,4 +1,4 @@
-function line_up(note) {
+export function line_up(note) {
     if (note[0] == "b") {
         /* One octave down */
         return "c" + (parseInt(note[1]) + 1);
@@ -13,7 +13,7 @@ function line_up(note) {
         note[0].charCodeAt() + 1) + note[1];
 }
 
-function line_down(note) {
+export function line_down(note) {
     if (note[0] == "c") {
         return "b" + (parseInt(note[1]) - 1);
 
@@ -26,7 +26,7 @@ function line_down(note) {
         note[0].charCodeAt() - 1) + note[1];
 }
 
-function lines_up(note, n) {
+export function lines_up(note, n) {
     let result = note;
 
     for (let i = 0; i < n; i++) {
@@ -36,7 +36,7 @@ function lines_up(note, n) {
     return result;
 }
 
-function lines_down(note, n) {
+export function lines_down(note, n) {
     let result = note;
 
     for (let i = 0; i < n; i++) {
@@ -46,7 +46,7 @@ function lines_down(note, n) {
     return result;
 }
 
-function note_less(note1, note2) {
+export function note_less(note1, note2) {
     if (note1[1] < note2[1])
         return true;
 
@@ -82,15 +82,15 @@ function note_less(note1, note2) {
     return false;
 }
 
-function note_greater(note1, note2) {
+export function note_greater(note1, note2) {
     return note1 != note2 && !note_less(note1, note2);
 }
 
-function add_octaves(note, n) {
+export function add_octaves(note, n) {
     return note[0] + String.fromCharCode(
         note[1].charCodeAt() + n);
 }
-function add_semitone(note) {
+export function add_semitone(note) {
     let sharp;
 
     if (note[0] == "e" || note[0] == "b") {
@@ -104,7 +104,7 @@ function add_semitone(note) {
     return [note, sharp];
 
 }
-function substract_semitone(note) {
+export function substract_semitone(note) {
     let sharp;
 
     note = line_down(note);
@@ -119,7 +119,7 @@ function substract_semitone(note) {
 
 }
 
-function note_to_index(note, sharp) {
+export function note_to_index(note, sharp) {
     let base;
 
     switch (note[0]) {
@@ -142,6 +142,6 @@ function note_to_index(note, sharp) {
     return (octave - 4) * 12 + base + (sharp == "s" ? 1 : 0);
 }
 
-function note_and_sharp_to_index(note_and_sharp) {
+export function note_and_sharp_to_index(note_and_sharp) {
     return note_to_index(note_and_sharp[0], note_and_sharp[1]);
 }

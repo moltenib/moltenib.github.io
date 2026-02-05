@@ -1,3 +1,8 @@
+import { ctx, HOLES } from "./variables.js";
+import { KEYS } from "./keys.js";
+import { line_up, lines_up, line_down, note_less } from "./note-operations.js";
+import { get_note, draw_on_recorder } from "./score.js";
+
 function display_accidental(crotchet, line) {
     let element = null;
 
@@ -124,7 +129,7 @@ function display_crotchet_stem_up(line) {
 
 }
 
-function on_note_above_score_mouseover(x) {
+export function on_note_above_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
@@ -150,7 +155,7 @@ function on_note_above_score_mouseover(x) {
 
 }
 
-function on_note_above_middle_mouseover(x) {
+export function on_note_above_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
@@ -159,7 +164,7 @@ function on_note_above_middle_mouseover(x) {
 
 }
 
-function on_note_below_middle_mouseover(x) {
+export function on_note_below_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
@@ -168,7 +173,7 @@ function on_note_below_middle_mouseover(x) {
 
 }
 
-function on_note_below_score_mouseover(x) {
+export function on_note_below_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
@@ -193,7 +198,7 @@ function on_note_below_score_mouseover(x) {
 
 }
 
-function on_score_mouseout(x) {
+export function on_score_mouseout(x) {
     HOLES.forEach(
         function(hole, index) {
             document.getElementById(hole).style.backgroundColor

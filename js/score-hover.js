@@ -3,6 +3,25 @@ import { KEYS } from "./keys.js";
 import { line_up, lines_up, line_down, note_less } from "./note-operations.js";
 import { get_note, draw_on_recorder } from "./score.js";
 
+function show_crotchet(crotchet, transform) {
+    const is_hidden = window.getComputedStyle(crotchet).opacity != "1";
+
+    if (is_hidden) {
+        /* If hidden, place instantly so it appears in place instead of sliding in. */
+        crotchet.classList.add("no-transition");
+        crotchet.style.transform = transform;
+        crotchet.style.opacity = "1";
+
+        /* Force style flush before restoring transitions. */
+        void crotchet.offsetWidth;
+        crotchet.classList.remove("no-transition");
+        return;
+    }
+
+    crotchet.style.transform = transform;
+    crotchet.style.opacity = "1";
+}
+
 function display_accidental(crotchet, line) {
     let element = null;
 
@@ -95,26 +114,14 @@ function display_crotchet_stem_down(line) {
 
     const x =
         line.offsetWidth / 2
-        - crotchet.width / 2;
+        - crotchet.offsetWidth / 2;
 
     const y =
         line.offsetHeight / 2
         + line.offsetTop - 18;
 
     const transform = "translate(" + x + "px, " + y + "px)";
-
-    if (crotchet.dataset.hasPositioned != "1") {
-        crotchet.style.transition = "none";
-        crotchet.style.transform = transform;
-        crotchet.style.opacity = "1";
-        crotchet.dataset.hasPositioned = "1";
-        requestAnimationFrame(function () {
-            crotchet.style.transition = "";
-        });
-    } else {
-        crotchet.style.transform = transform;
-        crotchet.style.opacity = "1";
-    }
+    show_crotchet(crotchet, transform);
 
     display_accidental(crotchet, line);
 
@@ -128,26 +135,14 @@ function display_crotchet_stem_up(line) {
 
     const x =
         line.offsetWidth / 2
-        - crotchet.width / 2;
+        - crotchet.offsetWidth / 2;
 
     const y =
         line.offsetHeight / 2
         + line.offsetTop - 70;
 
     const transform = "translate(" + x + "px, " + y + "px)";
-
-    if (crotchet.dataset.hasPositioned != "1") {
-        crotchet.style.transition = "none";
-        crotchet.style.transform = transform;
-        crotchet.style.opacity = "1";
-        crotchet.dataset.hasPositioned = "1";
-        requestAnimationFrame(function () {
-            crotchet.style.transition = "";
-        });
-    } else {
-        crotchet.style.transform = transform;
-        crotchet.style.opacity = "1";
-    }
+    show_crotchet(crotchet, transform);
 
     display_accidental(crotchet, line);
 

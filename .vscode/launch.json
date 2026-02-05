@@ -1,11 +1,28 @@
 {
   "version": "0.2.0",
+  "compounds": [
+    {
+      "name": "Serve + Open Recorder",
+      "configurations": [
+        "Start local server",
+        "Open Recorder (localhost)"
+      ],
+      "stopAll": true
+    }
+  ],
   "configurations": [
     {
-      "name": "Open index.html",
+      "name": "Start local server",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "python -m http.server 8000",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Open Recorder (localhost)",
       "type": "pwa-chrome",
       "request": "launch",
-      "url": "file://${workspaceFolder}/index.html",
+      "url": "http://localhost:8000/",
       "webRoot": "${workspaceFolder}"
     }
   ]

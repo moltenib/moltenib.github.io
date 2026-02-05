@@ -159,8 +159,11 @@
     width: 55px;
     opacity: 0;
     transform: translate(0, 0);
-    transition: transform 140ms ease, opacity 120ms ease;
+    transition: transform 10ms ease-out, opacity 10ms ease-out;
     will-change: transform, opacity;
+}
+.crotchet.no-transition {
+    transition: none !important;
 }
 .accidental {
     display: none;

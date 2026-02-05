@@ -1,5 +1,5 @@
 function display_accidental(crotchet, line) {
-    var element = null;
+    let element = null;
 
     if (
             /* If the accidental is sharp */
@@ -70,9 +70,9 @@ function display_accidental(crotchet, line) {
 
     } else {
         /* Hide both accidentals */
-        var elements = document.getElementsByClassName("accidental");
+        let elements = document.getElementsByClassName("accidental");
 
-        for (var i = 0; i < elements.length; i++) {
+        for (let i = 0; i < elements.length; i++) {
             elements[i].style.display = "none";
 
         }
@@ -85,7 +85,7 @@ function display_crotchet_stem_down(line) {
     document.getElementById("crotchet-stem-up").style.display = "none";
 
     /* Display the crotchet */
-    var crotchet = document.getElementById("crotchet-stem-down");
+    let crotchet = document.getElementById("crotchet-stem-down");
 
     crotchet.style.marginLeft =
         line.offsetWidth / 2
@@ -106,7 +106,7 @@ function display_crotchet_stem_down(line) {
 function display_crotchet_stem_up(line) {
     document.getElementById("crotchet-stem-down").style.display = "none";
 
-    var crotchet = document.getElementById("crotchet-stem-up");
+    let crotchet = document.getElementById("crotchet-stem-up");
 
     crotchet.style.marginLeft =
         line.offsetWidth / 2
@@ -125,14 +125,14 @@ function display_crotchet_stem_up(line) {
 }
 
 function on_note_above_score_mouseover(x) {
-    var note_and_sharp = get_note(x.id);
+    let note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
 
-    var lines = document.getElementsByClassName(
+    let lines = document.getElementsByClassName(
         "line-short-above");
 
-    for (var i = 0; i < lines.length; i++) {
+    for (let i = 0; i < lines.length; i++) {
         /* Greater or equal than */
         if (!note_less(x.id, lines[i].id)) {
             lines[i].style.background
@@ -151,7 +151,7 @@ function on_note_above_score_mouseover(x) {
 }
 
 function on_note_above_middle_mouseover(x) {
-    var note_and_sharp = get_note(x.id);
+    let note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
 
@@ -160,7 +160,7 @@ function on_note_above_middle_mouseover(x) {
 }
 
 function on_note_below_middle_mouseover(x) {
-    var note_and_sharp = get_note(x.id);
+    let note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
 
@@ -169,14 +169,14 @@ function on_note_below_middle_mouseover(x) {
 }
 
 function on_note_below_score_mouseover(x) {
-    var note_and_sharp = get_note(x.id);
+    let note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
 
-    var lines = document.getElementsByClassName(
+    let lines = document.getElementsByClassName(
         "line-short-below");
 
-    for (var i = 0; i < lines.length; i++) {
+    for (let i = 0; i < lines.length; i++) {
         if (note_less(lines[i].id, x.id)) {
             lines[i].style.background
                 = "none";
@@ -221,13 +221,13 @@ function on_score_mouseout(x) {
 
     document.getElementById("out-of-range").style.display = "none";
 
-    var lines;
+    let lines;
 
     ["line-short-above", "line-short-below"].forEach(
         function (class_name, index) {
             lines = document.getElementsByClassName(class_name);
 
-            for (var i = 0; i < lines.length; i++) {
+            for (let i = 0; i < lines.length; i++) {
                 lines[i].style.background = "none";
 
             }

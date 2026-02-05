@@ -1,3 +1,37 @@
+let key_signature_cache = null;
+
+function get_key_signature_cache() {
+    if (key_signature_cache) {
+        return key_signature_cache;
+    }
+
+    key_signature_cache = {
+        sharps: {
+            g: [],
+            f: []
+        },
+        flats: {
+            g: [],
+            f: []
+        },
+        sharp_elements: document.getElementsByClassName("sharp"),
+        flat_elements: document.getElementsByClassName("flat")
+    };
+
+    for (let i = 0; i < 7; i++) {
+        key_signature_cache.sharps.g.push(
+            document.getElementById("sharp-" + i + "-g"));
+        key_signature_cache.sharps.f.push(
+            document.getElementById("sharp-" + i + "-f"));
+        key_signature_cache.flats.g.push(
+            document.getElementById("flat-" + i + "-g"));
+        key_signature_cache.flats.f.push(
+            document.getElementById("flat-" + i + "-f"));
+    }
+
+    return key_signature_cache;
+}
+
 function select_style(value) {
     /* German or Baroque */
     ctx.style = value;
@@ -14,47 +48,41 @@ function select_as_written(value) {
 function select_key(value) {
     ctx.key = parseInt(value);
 
+    let cache = get_key_signature_cache();
+
     if (ctx.key <= 7) {
         /* Use sharps */
-        var sharps_to_add = 7 - ctx.key;
+        let sharps_to_add = 7 - ctx.key;
 
-        var i;
+        let i;
 
         for (i = 0; i < sharps_to_add; i++) {
-            document.getElementById(
-                "sharp-" + i + "-" + ctx.clef).style.display = "block";
+            cache.sharps[ctx.clef][i].style.display = "block";
 
         }
 
         for (; i < 7; i++)
-            document.getElementById(
-                "sharp-" + i + "-" + ctx.clef).style.display = "none";
+            cache.sharps[ctx.clef][i].style.display = "none";
 
-        var elements = document.getElementsByClassName("flat");
-
-        for (var i = 0; i < elements.length; i++)
-            elements[i].style.display = "none";
+        for (i = 0; i < cache.flat_elements.length; i++)
+            cache.flat_elements[i].style.display = "none";
 
     } else {
         /* Use flats */
-        var flats_to_add = ctx.key - 7;
+        let flats_to_add = ctx.key - 7;
 
-        var i;
+        let i;
 
         for (i = 0; i < flats_to_add; i++) {
-            document.getElementById(
-                "flat-" + i + "-" + ctx.clef).style.display = "block";
+            cache.flats[ctx.clef][i].style.display = "block";
 
         }
 
         for (; i < 7; i++)
-            document.getElementById(
-                "flat-" + i + "-" + ctx.clef).style.display = "none";
+            cache.flats[ctx.clef][i].style.display = "none";
 
-        var elements = document.getElementsByClassName("sharp");
-
-        for (var i = 0; i < elements.length; i++)
-            elements[i].style.display = "none";
+        for (i = 0; i < cache.sharp_elements.length; i++)
+            cache.sharp_elements[i].style.display = "none";
 
     }
 
@@ -69,14 +97,14 @@ function select_clef(value) {
     document.getElementById("bass-clef").style.display = (
         ctx.clef == "f" ? "block" : "none");
 
-    var elements = document.getElementsByClassName(
+    let elements = document.getElementsByClassName(
         "key-signature");
 
-    for (var i = 0; i < elements.length; i++)
+    for (let i = 0; i < elements.length; i++)
         elements[i].style.display = "none";
 
     if (ctx.size == "4" && ctx.clef == "g") {
-        var element = document.getElementById(
+        let element = document.getElementById(
             "as-written");
 
         element.value = "t";
@@ -97,9 +125,9 @@ function select_clef(value) {
 function select_size(value) {
     ctx.size = value;
 
-    var clef_value = (value == "4" ? "f" : "g");
+    let clef_value = (value == "4" ? "f" : "g");
 
-    var element = document.getElementById("clef");
+    let element = document.getElementById("clef");
 
     /* Bass recorder uses a bass clef, others use treble  */
     if (element.value != clef_value) {

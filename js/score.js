@@ -1,6 +1,6 @@
 /* The fingering that should be used on a C recorder */
 function get_note(note) {
-    var n = note;
+    let n = note;
 
     if (ctx.clef == "f") {
         /* This will turn, for example, `d5' into `f3' */
@@ -34,9 +34,9 @@ function get_note(note) {
     return [n, "n"];
 }
 function note_and_sharp_to_alto(note_and_sharp) {
-    var n = lines_down(note_and_sharp[0], 2);
+    let n = lines_down(note_and_sharp[0], 2);
 
-    var sharp = note_and_sharp[1];
+    let sharp = note_and_sharp[1];
 
     if (n[0].match(/[cf]/)) {
         if (sharp == "s") {
@@ -71,7 +71,7 @@ function note_and_sharp_to_soprano(note_and_sharp) {
 function note_and_sharp_to_bass(note_and_sharp) {
     note_and_sharp = note_and_sharp_to_alto(note_and_sharp);
 
-    var raise_by = (ctx.as_written == "t" ? 1 : 2);
+    let raise_by = (ctx.as_written == "t" ? 1 : 2);
 
     return [
         add_octaves(note_and_sharp[0], raise_by),
@@ -95,8 +95,8 @@ function draw_on_recorder(note_and_sharp) {
 
     }
 
-    var index = note_and_sharp_to_index(note_and_sharp);
-    var position = (index != null ? POSITIONS[index] : null);
+    let index = note_and_sharp_to_index(note_and_sharp);
+    let position = (index != null ? POSITIONS[index] : null);
 
     if (
         index == null
@@ -107,7 +107,7 @@ function draw_on_recorder(note_and_sharp) {
         /* Out of range */
         document.getElementById("out-of-range").style.display = "block";
         /* Clear any previous fingering */
-        for (var i = 0; i < HOLES.length; i++) {
+        for (let i = 0; i < HOLES.length; i++) {
             document.getElementById(HOLES[i]).style.background = "none";
             document.getElementById(HOLES[i]).style.backgroundColor = "white";
         }
@@ -120,12 +120,12 @@ function draw_on_recorder(note_and_sharp) {
     }
 
     /* Use German fingering when Baroque is not available */
-    var style_ = (position[ctx.style] ? ctx.style : "g");
+    let style_ = (position[ctx.style] ? ctx.style : "g");
 
     if (!position[style_]) {
         document.getElementById("out-of-range").style.display = "block";
 
-        for (var i = 0; i < HOLES.length; i++) {
+        for (let i = 0; i < HOLES.length; i++) {
             document.getElementById(HOLES[i]).style.background = "none";
             document.getElementById(HOLES[i]).style.backgroundColor = "white";
         }
@@ -133,9 +133,9 @@ function draw_on_recorder(note_and_sharp) {
         return;
     }
 
-    var i = 0;
+    let i = 0;
 
-    var j = 0;
+    let j = 0;
 
     /* Clear any previous half-hole gradients */
     document.getElementById("0").style.background = "none";

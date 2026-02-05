@@ -27,9 +27,9 @@ function line_down(note) {
 }
 
 function lines_up(note, n) {
-    var result = note;
+    let result = note;
 
-    for (var i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         result = line_up(result);
     }
 
@@ -37,9 +37,9 @@ function lines_up(note, n) {
 }
 
 function lines_down(note, n) {
-    var result = note;
+    let result = note;
 
-    for (var i = 0; i < n; i++) {
+    for (let i = 0; i < n; i++) {
         result = line_down(result);
     }
 
@@ -91,7 +91,7 @@ function add_octaves(note, n) {
         note[1].charCodeAt() + n);
 }
 function add_semitone(note) {
-    var sharp;
+    let sharp;
 
     if (note[0] == "e" || note[0] == "b") {
         sharp = "n";
@@ -105,7 +105,7 @@ function add_semitone(note) {
 
 }
 function substract_semitone(note) {
-    var sharp;
+    let sharp;
 
     note = line_down(note);
 
@@ -120,7 +120,7 @@ function substract_semitone(note) {
 }
 
 function note_to_index(note, sharp) {
-    var base;
+    let base;
 
     switch (note[0]) {
         case "c": base = 0; break;
@@ -133,7 +133,7 @@ function note_to_index(note, sharp) {
         default: return null;
     }
 
-    var octave = parseInt(note[1], 10);
+    let octave = parseInt(note[1], 10);
 
     if (isNaN(octave)) {
         return null;

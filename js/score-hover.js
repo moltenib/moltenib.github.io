@@ -70,7 +70,7 @@ function display_accidental(crotchet, line) {
 
     } else {
         /* Hide both accidentals */
-        let elements = document.getElementsByClassName("accidental");
+        const elements = document.getElementsByClassName("accidental");
 
         for (let i = 0; i < elements.length; i++) {
             elements[i].style.display = "none";
@@ -85,7 +85,7 @@ function display_crotchet_stem_down(line) {
     document.getElementById("crotchet-stem-up").style.display = "none";
 
     /* Display the crotchet */
-    let crotchet = document.getElementById("crotchet-stem-down");
+    const crotchet = document.getElementById("crotchet-stem-down");
 
     crotchet.style.marginLeft =
         line.offsetWidth / 2
@@ -106,7 +106,7 @@ function display_crotchet_stem_down(line) {
 function display_crotchet_stem_up(line) {
     document.getElementById("crotchet-stem-down").style.display = "none";
 
-    let crotchet = document.getElementById("crotchet-stem-up");
+    const crotchet = document.getElementById("crotchet-stem-up");
 
     crotchet.style.marginLeft =
         line.offsetWidth / 2
@@ -125,11 +125,11 @@ function display_crotchet_stem_up(line) {
 }
 
 function on_note_above_score_mouseover(x) {
-    let note_and_sharp = get_note(x.id);
+    const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
 
-    let lines = document.getElementsByClassName(
+    const lines = document.getElementsByClassName(
         "line-short-above");
 
     for (let i = 0; i < lines.length; i++) {
@@ -151,7 +151,7 @@ function on_note_above_score_mouseover(x) {
 }
 
 function on_note_above_middle_mouseover(x) {
-    let note_and_sharp = get_note(x.id);
+    const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_down(x);
 
@@ -160,7 +160,7 @@ function on_note_above_middle_mouseover(x) {
 }
 
 function on_note_below_middle_mouseover(x) {
-    let note_and_sharp = get_note(x.id);
+    const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
 
@@ -169,11 +169,11 @@ function on_note_below_middle_mouseover(x) {
 }
 
 function on_note_below_score_mouseover(x) {
-    let note_and_sharp = get_note(x.id);
+    const note_and_sharp = get_note(x.id);
 
     display_crotchet_stem_up(x);
 
-    let lines = document.getElementsByClassName(
+    const lines = document.getElementsByClassName(
         "line-short-below");
 
     for (let i = 0; i < lines.length; i++) {

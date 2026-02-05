@@ -71,7 +71,7 @@ function note_and_sharp_to_soprano(note_and_sharp) {
 function note_and_sharp_to_bass(note_and_sharp) {
     note_and_sharp = note_and_sharp_to_alto(note_and_sharp);
 
-    let raise_by = (ctx.as_written == "t" ? 1 : 2);
+    const raise_by = (ctx.as_written == "t" ? 1 : 2);
 
     return [
         add_octaves(note_and_sharp[0], raise_by),
@@ -95,8 +95,8 @@ function draw_on_recorder(note_and_sharp) {
 
     }
 
-    let index = note_and_sharp_to_index(note_and_sharp);
-    let position = (index != null ? POSITIONS[index] : null);
+    const index = note_and_sharp_to_index(note_and_sharp);
+    const position = (index != null ? POSITIONS[index] : null);
 
     if (
         index == null
@@ -120,7 +120,7 @@ function draw_on_recorder(note_and_sharp) {
     }
 
     /* Use German fingering when Baroque is not available */
-    let style_ = (position[ctx.style] ? ctx.style : "g");
+    const style_ = (position[ctx.style] ? ctx.style : "g");
 
     if (!position[style_]) {
         document.getElementById("out-of-range").style.display = "block";

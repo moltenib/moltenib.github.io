@@ -133,7 +133,7 @@ function note_to_index(note, sharp) {
         default: return null;
     }
 
-    let octave = parseInt(note[1], 10);
+    const octave = parseInt(note[1], 10);
 
     if (isNaN(octave)) {
         return null;

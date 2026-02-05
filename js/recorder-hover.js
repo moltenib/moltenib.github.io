@@ -1,8 +1,8 @@
 function on_hole_mouseover(x) {
     x.style.backgroundColor = "black";
 
-    let element = document.getElementById("hole-tooltip");
-    let recorder = document.getElementById("recorder");
+    const element = document.getElementById("hole-tooltip");
+    const recorder = document.getElementById("recorder");
 
     element.textContent = HOLE_TOOLTIPS[x.id];
 

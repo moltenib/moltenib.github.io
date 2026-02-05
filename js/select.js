@@ -48,11 +48,11 @@ function select_as_written(value) {
 function select_key(value) {
     ctx.key = parseInt(value);
 
-    let cache = get_key_signature_cache();
+    const cache = get_key_signature_cache();
 
     if (ctx.key <= 7) {
         /* Use sharps */
-        let sharps_to_add = 7 - ctx.key;
+        const sharps_to_add = 7 - ctx.key;
 
         let i;
 
@@ -69,7 +69,7 @@ function select_key(value) {
 
     } else {
         /* Use flats */
-        let flats_to_add = ctx.key - 7;
+        const flats_to_add = ctx.key - 7;
 
         let i;
 
@@ -97,14 +97,14 @@ function select_clef(value) {
     document.getElementById("bass-clef").style.display = (
         ctx.clef == "f" ? "block" : "none");
 
-    let elements = document.getElementsByClassName(
+    const elements = document.getElementsByClassName(
         "key-signature");
 
     for (let i = 0; i < elements.length; i++)
         elements[i].style.display = "none";
 
     if (ctx.size == "4" && ctx.clef == "g") {
-        let element = document.getElementById(
+        const element = document.getElementById(
             "as-written");
 
         element.value = "t";
@@ -125,7 +125,7 @@ function select_clef(value) {
 function select_size(value) {
     ctx.size = value;
 
-    let clef_value = (value == "4" ? "f" : "g");
+    const clef_value = (value == "4" ? "f" : "g");
 
     let element = document.getElementById("clef");
 

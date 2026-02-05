@@ -119,3 +119,29 @@ function substract_semitone(note) {
 
 }
 
+function note_to_index(note, sharp) {
+    var base;
+
+    switch (note[0]) {
+        case "c": base = 0; break;
+        case "d": base = 2; break;
+        case "e": base = 4; break;
+        case "f": base = 5; break;
+        case "g": base = 7; break;
+        case "a": base = 9; break;
+        case "b": base = 11; break;
+        default: return null;
+    }
+
+    var octave = parseInt(note[1], 10);
+
+    if (isNaN(octave)) {
+        return null;
+    }
+
+    return (octave - 4) * 12 + base + (sharp == "s" ? 1 : 0);
+}
+
+function note_and_sharp_to_index(note_and_sharp) {
+    return note_to_index(note_and_sharp[0], note_and_sharp[1]);
+}

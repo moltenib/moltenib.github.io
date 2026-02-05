@@ -79,18 +79,6 @@ function note_and_sharp_to_bass(note_and_sharp) {
     ];
 }
 
-function note_out_of_range(note_and_sharp) {
-    return (
-        note_less(note_and_sharp[0], "c4")
-        || note_greater(note_and_sharp[0], "d6")
-        || (
-            note_and_sharp[0] == "d6"
-            && note_and_sharp[1] == "s"
-        )
-    );
-}
-
-
 /* Main drawing function, takes the notes played by a tenor recorder */
 function draw_on_recorder(note_and_sharp) {
     if (size == "1" && as_written == "t") {
@@ -107,7 +95,15 @@ function draw_on_recorder(note_and_sharp) {
 
     }
 
-    if (note_out_of_range(note_and_sharp)) {
+    var index = note_and_sharp_to_index(note_and_sharp);
+    var position = (index != null ? POSITIONS[index] : null);
+
+    if (
+        index == null
+        || index < 0
+        || index >= POSITIONS.length
+        || !position
+    ) {
         /* Out of range */
         document.getElementById("out-of-range").style.display = "block";
         /* Clear any previous fingering */
@@ -124,8 +120,18 @@ function draw_on_recorder(note_and_sharp) {
     }
 
     /* Use German fingering when Baroque is not available */
-    var style_ = (
-        POSITIONS[note_and_sharp[0]][note_and_sharp[1]][style] ? style : "g");
+    var style_ = (position[style] ? style : "g");
+
+    if (!position[style_]) {
+        document.getElementById("out-of-range").style.display = "block";
+
+        for (var i = 0; i < HOLES.length; i++) {
+            document.getElementById(HOLES[i]).style.background = "none";
+            document.getElementById(HOLES[i]).style.backgroundColor = "white";
+        }
+
+        return;
+    }
 
     var i = 0;
 
@@ -136,8 +142,7 @@ function draw_on_recorder(note_and_sharp) {
     document.getElementById("2").style.background = "none";
 
     if (
-        POSITIONS[note_and_sharp[0]][note_and_sharp[1]][style_][0]
-            == "0b" ) {
+        position[style_][0] == "0b" ) {
         /* Set background image */
         document.getElementById("0").style.background
             = "linear-gradient(to right, white 50%, black 50%, black 100%)";
@@ -148,8 +153,7 @@ function draw_on_recorder(note_and_sharp) {
 
     }
 
-    if (note_and_sharp[0] == "c6"
-            && note_and_sharp[1] == "s") { 
+    if (index == 25) { 
         document.getElementById("2").style.background
             = "linear-gradient(to right, white 50%, black 50%, black 100%)";
 
@@ -157,7 +161,7 @@ function draw_on_recorder(note_and_sharp) {
 
     for (; i < HOLES.length; i++) {
         if (
-            POSITIONS[note_and_sharp[0]][note_and_sharp[1]][style_][j]
+            position[style_][j]
                 == HOLES[i]) {
             document.getElementById(HOLES[i]).style.backgroundColor
                     = "black";

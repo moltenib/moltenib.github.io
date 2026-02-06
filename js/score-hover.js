@@ -22,7 +22,7 @@ function show_crotchet(crotchet, transform) {
     crotchet.style.opacity = "1";
 }
 
-function display_accidental(crotchet, line) {
+function display_accidental(crotchet, line, crotchet_x) {
     let element = null;
 
     if (
@@ -80,16 +80,23 @@ function display_accidental(crotchet, line) {
 
     if (element) {
         /* If an accidental ought to be displayed */
+        element.style.right = "auto";
+        element.style.left = "";
+        element.style.top = "";
         element.style.marginLeft =
-            crotchet.offsetLeft
-            - 75
+            Math.round(
+                crotchet.offsetLeft
+                + crotchet_x
+                - 75
+            )
             + "px";
-
-        element.style.marginTop = 
-            line.offsetHeight / 2
-            + line.offsetTop - 20
+        element.style.marginTop =
+            Math.round(
+                line.offsetHeight / 2
+                + line.offsetTop
+                - 20
+            )
             + "px";
-
         element.style.display = "block";
 
     } else {
@@ -105,12 +112,11 @@ function display_accidental(crotchet, line) {
 
 }
 
-function display_crotchet_stem_down(line) {
-    const crotchet_up = document.getElementById("crotchet-stem-up");
-    crotchet_up.style.opacity = "0";
+function display_crotchet(line, active_id, inactive_id, y_offset) {
+    const inactive = document.getElementById(inactive_id);
+    inactive.style.opacity = "0";
 
-    /* Display the crotchet */
-    const crotchet = document.getElementById("crotchet-stem-down");
+    const crotchet = document.getElementById(active_id);
 
     const x =
         line.offsetWidth / 2
@@ -118,34 +124,28 @@ function display_crotchet_stem_down(line) {
 
     const y =
         line.offsetHeight / 2
-        + line.offsetTop - 18;
+        + line.offsetTop + y_offset;
 
     const transform = "translate(" + x + "px, " + y + "px)";
     show_crotchet(crotchet, transform);
 
-    display_accidental(crotchet, line);
+    display_accidental(crotchet, line, x);
+}
 
+function display_crotchet_stem_down(line) {
+    display_crotchet(
+        line,
+        "crotchet-stem-down",
+        "crotchet-stem-up",
+        -18);
 }
 
 function display_crotchet_stem_up(line) {
-    const crotchet_down = document.getElementById("crotchet-stem-down");
-    crotchet_down.style.opacity = "0";
-
-    const crotchet = document.getElementById("crotchet-stem-up");
-
-    const x =
-        line.offsetWidth / 2
-        - crotchet.offsetWidth / 2;
-
-    const y =
-        line.offsetHeight / 2
-        + line.offsetTop - 70;
-
-    const transform = "translate(" + x + "px, " + y + "px)";
-    show_crotchet(crotchet, transform);
-
-    display_accidental(crotchet, line);
-
+    display_crotchet(
+        line,
+        "crotchet-stem-up",
+        "crotchet-stem-down",
+        -70);
 }
 
 export function on_note_above_score_mouseover(x) {

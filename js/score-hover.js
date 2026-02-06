@@ -117,10 +117,11 @@ function display_crotchet(line, active_id, inactive_id, y_offset) {
     inactive.style.opacity = "0";
 
     const crotchet = document.getElementById(active_id);
+    const score = document.getElementById("score");
 
-    const x =
-        line.offsetWidth / 2
-        - crotchet.offsetWidth / 2;
+    const x = Math.round(
+        score.offsetWidth / 2
+        - crotchet.offsetWidth / 2);
 
     const y =
         line.offsetHeight / 2

@@ -1,3 +1,10 @@
+#current-note {
+    display: block;
+    visibility: hidden;
+    width: fit-content;
+    margin: 10px auto 10px auto;
+    text-align: center;
+}
 .hole {
     background-color: white;
     border-radius: 50%;

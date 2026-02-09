@@ -1,7 +1,120 @@
 import { ctx, HOLES } from "./variables.js";
 import { KEYS } from "./keys.js";
-import { line_up, lines_up, line_down, note_less } from "./note-operations.js";
+import {
+    add_octaves,
+    line_up,
+    lines_up,
+    line_down,
+    note_less
+} from "./note-operations.js";
 import { get_note, draw_on_recorder } from "./score.js";
+
+let current_note_element = null;
+let current_note_text = "";
+let current_note_visible = "";
+let dom_cache = null;
+
+function get_current_note_element() {
+    if (!current_note_element) {
+        current_note_element = document.getElementById("current-note");
+    }
+
+    return current_note_element;
+}
+
+function get_dom_cache() {
+    if (dom_cache) {
+        return dom_cache;
+    }
+
+    const hole_elements = {};
+
+    for (let i = 0; i < HOLES.length; i++) {
+        hole_elements[HOLES[i]] = document.getElementById(HOLES[i]);
+    }
+
+    dom_cache = {
+        score: document.getElementById("score"),
+        crotchet_down: document.getElementById("crotchet-stem-down"),
+        crotchet_up: document.getElementById("crotchet-stem-up"),
+        accidental_sharp: document.getElementById("accidental-sharp"),
+        accidental_flat: document.getElementById("accidental-flat"),
+        accidental_elements: document.getElementsByClassName("accidental"),
+        lines_above: document.getElementsByClassName("line-short-above"),
+        lines_below: document.getElementsByClassName("line-short-below"),
+        out_of_range: document.getElementById("out-of-range"),
+        cached_score_width: null,
+        cached_crotchet_x: null,
+        hole_elements: hole_elements
+    };
+
+    return dom_cache;
+}
+
+function get_crotchet_x(cache) {
+    const score_width = cache.score.offsetWidth;
+
+    if (
+        cache.cached_crotchet_x == null
+        || cache.cached_score_width !== score_width
+    ) {
+        cache.cached_score_width = score_width;
+        cache.cached_crotchet_x = Math.floor(
+            (score_width - cache.crotchet_down.offsetWidth) / 2
+        );
+    }
+
+    return cache.cached_crotchet_x;
+}
+
+function set_current_note(note_id) {
+    const current_note = get_current_note_element();
+
+    if (!current_note) {
+        return;
+    }
+
+    if (!note_id) {
+        if (current_note_text != "-") {
+            current_note.textContent = "-";
+            current_note_text = "-";
+        }
+        if (current_note_visible != "hidden") {
+            current_note.style.visibility = "hidden";
+            current_note_visible = "hidden";
+        }
+        return;
+    }
+
+    let displayed_note = note_id;
+
+    /* Soprano sounds one octave above written pitch when not "as written". */
+    if (ctx.size == "1" && ctx.as_written == "f") {
+        displayed_note = add_octaves(displayed_note, 1);
+    }
+    /* Bass is written one octave above sounding pitch when not "as written". */
+    if (ctx.size == "4" && ctx.as_written == "f") {
+        displayed_note = add_octaves(displayed_note, -1);
+    }
+
+    const letter = displayed_note[0].toUpperCase();
+    const octave = displayed_note.slice(1);
+    const accidental = (
+        ctx.accidental == "1" ? "♯"
+        : (ctx.accidental == "-1" ? "♭" : "")
+    );
+
+    const next_text = letter + accidental + octave;
+
+    if (current_note_text != next_text) {
+        current_note.textContent = next_text;
+        current_note_text = next_text;
+    }
+    if (current_note_visible != "visible") {
+        current_note.style.visibility = "visible";
+        current_note_visible = "visible";
+    }
+}
 
 function show_crotchet(crotchet, transform) {
     const is_hidden = window.getComputedStyle(crotchet).opacity != "1";
@@ -24,6 +137,9 @@ function show_crotchet(crotchet, transform) {
 
 function display_accidental(crotchet, line, crotchet_x) {
     let element = null;
+    const cache = get_dom_cache();
+    const accidental_sharp = cache.accidental_sharp;
+    const accidental_flat = cache.accidental_flat;
 
     if (
             /* If the accidental is sharp */
@@ -44,11 +160,10 @@ function display_accidental(crotchet, line, crotchet_x) {
             )
     ) {
         /* Hide the flat accidental */
-        document.getElementById(
-            "accidental-flat").style.display = "none";
+        accidental_flat.style.display = "none";
 
         /* Choose the sharp as the one to display */
-        element = document.getElementById("accidental-sharp");
+        element = accidental_sharp;
 
     } else if (
             /* Flat is selected */
@@ -70,11 +185,10 @@ function display_accidental(crotchet, line, crotchet_x) {
             )
     ) {
         /* Hide sharp */
-        document.getElementById(
-            "accidental-sharp").style.display = "none";
+        accidental_sharp.style.display = "none";
 
         /* Show the flat accidental */
-        element = document.getElementById("accidental-flat");
+        element = accidental_flat;
 
     }
 
@@ -101,7 +215,7 @@ function display_accidental(crotchet, line, crotchet_x) {
 
     } else {
         /* Hide both accidentals */
-        const elements = document.getElementsByClassName("accidental");
+        const elements = cache.accidental_elements;
 
         for (let i = 0; i < elements.length; i++) {
             elements[i].style.display = "none";
@@ -113,15 +227,20 @@ function display_accidental(crotchet, line, crotchet_x) {
 }
 
 function display_crotchet(line, active_id, inactive_id, y_offset) {
-    const inactive = document.getElementById(inactive_id);
+    const cache = get_dom_cache();
+    const inactive = (
+        inactive_id == "crotchet-stem-up"
+        ? cache.crotchet_up
+        : cache.crotchet_down
+    );
     inactive.style.opacity = "0";
 
-    const crotchet = document.getElementById(active_id);
-    const score = document.getElementById("score");
-
-    const x = Math.round(
-        score.offsetWidth / 2
-        - crotchet.offsetWidth / 2);
+    const crotchet = (
+        active_id == "crotchet-stem-up"
+        ? cache.crotchet_up
+        : cache.crotchet_down
+    );
+    const x = get_crotchet_x(cache);
 
     const y =
         line.offsetHeight / 2
@@ -151,11 +270,11 @@ function display_crotchet_stem_up(line) {
 
 export function on_note_above_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
+    set_current_note(x.id);
 
     display_crotchet_stem_down(x);
 
-    const lines = document.getElementsByClassName(
-        "line-short-above");
+    const lines = get_dom_cache().lines_above;
 
     for (let i = 0; i < lines.length; i++) {
         /* Greater or equal than */
@@ -177,6 +296,7 @@ export function on_note_above_score_mouseover(x) {
 
 export function on_note_above_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
+    set_current_note(x.id);
 
     display_crotchet_stem_down(x);
 
@@ -186,6 +306,7 @@ export function on_note_above_middle_mouseover(x) {
 
 export function on_note_below_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
+    set_current_note(x.id);
 
     display_crotchet_stem_up(x);
 
@@ -195,11 +316,11 @@ export function on_note_below_middle_mouseover(x) {
 
 export function on_note_below_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
+    set_current_note(x.id);
 
     display_crotchet_stem_up(x);
 
-    const lines = document.getElementsByClassName(
-        "line-short-below");
+    const lines = get_dom_cache().lines_below;
 
     for (let i = 0; i < lines.length; i++) {
         if (note_less(lines[i].id, x.id)) {
@@ -219,46 +340,39 @@ export function on_note_below_score_mouseover(x) {
 }
 
 export function on_score_mouseout(x) {
+    set_current_note(null);
+    const cache = get_dom_cache();
+
     HOLES.forEach(
         function(hole, index) {
-            document.getElementById(hole).style.backgroundColor
+            cache.hole_elements[hole].style.backgroundColor
                 = "white";
 
         }
 
     );
 
-    document.getElementById(
-        "crotchet-stem-down").style.opacity = "0";
+    cache.crotchet_down.style.opacity = "0";
 
-    document.getElementById(
-        "crotchet-stem-up").style.opacity = "0";
+    cache.crotchet_up.style.opacity = "0";
 
-    document.getElementById(
-        "accidental-sharp").style.display = "none";
+    cache.accidental_sharp.style.display = "none";
 
-    document.getElementById(
-        "accidental-flat").style.display = "none";
+    cache.accidental_flat.style.display = "none";
 
-    document.getElementById("0").style.background = "none";
+    cache.hole_elements["0"].style.background = "none";
 
-    document.getElementById("2").style.background = "none";
+    cache.hole_elements["2"].style.background = "none";
 
-    document.getElementById("out-of-range").style.display = "none";
+    cache.out_of_range.style.display = "none";
+    const lines_groups = [cache.lines_above, cache.lines_below];
 
-    let lines;
+    for (let g = 0; g < lines_groups.length; g++) {
+        const lines = lines_groups[g];
 
-    ["line-short-above", "line-short-below"].forEach(
-        function (class_name, index) {
-            lines = document.getElementsByClassName(class_name);
-
-            for (let i = 0; i < lines.length; i++) {
-                lines[i].style.background = "none";
-
-            }
-
+        for (let i = 0; i < lines.length; i++) {
+            lines[i].style.background = "none";
         }
-
-    );
+    }
 
 }

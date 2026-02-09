@@ -28,11 +28,11 @@
 }
 #treble-clef {
     width: 52px;
-    margin-top: 95px;
+    margin-top: 90px;
 }
 #bass-clef {
-    margin-top: 83px;
-    width: 110px;
+    margin-top: 82px;
+    width: 102px;
     display: none;
 }
 .sharp {

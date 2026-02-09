@@ -148,4 +148,10 @@ export function apply_i18n(locale = null) {
     render_description(page.description, page.footnote);
     render_language_selector(active_locale, page.languages);
     hide_tooltip();
+
+    window.dispatchEvent(
+        new CustomEvent("localechange", {
+            detail: { locale: active_locale }
+        })
+    );
 }

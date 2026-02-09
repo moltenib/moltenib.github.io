@@ -1,5 +1,6 @@
 export const IT_TRANSLATIONS = {
     locale: "it",
+    note_octave_offset: -1,
     page: {
         title: "Grafico delle diteggiature del flauto dolce",
         og_title: "Grafico delle diteggiature del flauto dolce",

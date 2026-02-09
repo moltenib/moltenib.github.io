@@ -1,5 +1,6 @@
 export const DE_TRANSLATIONS = {
     locale: "de",
+    note_octave_offset: 0,
     page: {
         title: "Grifftabelle für Blockflöte",
         og_title: "Grifftabelle für Blockflöte",

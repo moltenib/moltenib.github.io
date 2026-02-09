@@ -1,5 +1,6 @@
 import { ctx, HOLES } from "./variables.js";
 import { KEYS } from "./keys.js";
+import { get_current_locale, get_translations } from "./translations/index.js";
 import {
     add_octaves,
     line_up,
@@ -12,7 +13,75 @@ import { get_note, draw_on_recorder } from "./score.js";
 let current_note_element = null;
 let current_note_text = "";
 let current_note_visible = "";
+let current_note_id = null;
 let dom_cache = null;
+const NOTE_NAMES_BY_LOCALE = {
+    en: {
+        c: "C",
+        d: "D",
+        e: "E",
+        f: "F",
+        g: "G",
+        a: "A",
+        b: "B"
+    },
+    es: {
+        c: "Do",
+        d: "Re",
+        e: "Mi",
+        f: "Fa",
+        g: "Sol",
+        a: "La",
+        b: "Si"
+    },
+    it: {
+        c: "Do",
+        d: "Re",
+        e: "Mi",
+        f: "Fa",
+        g: "Sol",
+        a: "La",
+        b: "Si"
+    },
+    de: {
+        c: "C",
+        d: "D",
+        e: "E",
+        f: "F",
+        g: "G",
+        a: "A",
+        b: "H"
+    }
+};
+
+function get_localized_note_name(note_letter, accidental) {
+    const locale = get_current_locale();
+    const lower_letter = note_letter.toLowerCase();
+    const names = NOTE_NAMES_BY_LOCALE[locale] || NOTE_NAMES_BY_LOCALE.en;
+    let name = names[lower_letter] || note_letter.toUpperCase();
+    let accidental_symbol = accidental;
+
+    /* In German notation, Bb is written as "B". */
+    if (locale == "de" && lower_letter == "b" && accidental == "♭") {
+        name = "B";
+        accidental_symbol = "";
+    }
+
+    return [name, accidental_symbol];
+}
+
+function get_localized_octave(octave_text) {
+    const octave_number = parseInt(octave_text, 10);
+
+    if (isNaN(octave_number)) {
+        return octave_text;
+    }
+
+    const translations = get_translations();
+    const offset = Number(translations.note_octave_offset || 0);
+
+    return String(octave_number + offset);
+}
 
 function get_current_note_element() {
     if (!current_note_element) {
@@ -75,6 +144,7 @@ function set_current_note(note_id) {
     }
 
     if (!note_id) {
+        current_note_id = null;
         if (current_note_text != "-") {
             current_note.textContent = "-";
             current_note_text = "-";
@@ -87,6 +157,7 @@ function set_current_note(note_id) {
     }
 
     let displayed_note = note_id;
+    current_note_id = note_id;
 
     /* Soprano sounds one octave above written pitch when not "as written". */
     if (ctx.size == "1" && ctx.as_written == "f") {
@@ -97,14 +168,17 @@ function set_current_note(note_id) {
         displayed_note = add_octaves(displayed_note, -1);
     }
 
-    const letter = displayed_note[0].toUpperCase();
-    const octave = displayed_note.slice(1);
+    const letter = displayed_note[0];
+    const octave = get_localized_octave(displayed_note.slice(1));
     const accidental = (
         ctx.accidental == "1" ? "♯"
         : (ctx.accidental == "-1" ? "♭" : "")
     );
+    const localized = get_localized_note_name(letter, accidental);
+    const note_name = localized[0];
+    const note_accidental = localized[1];
 
-    const next_text = letter + accidental + octave;
+    const next_text = note_name + note_accidental + octave;
 
     if (current_note_text != next_text) {
         current_note.textContent = next_text;
@@ -115,6 +189,13 @@ function set_current_note(note_id) {
         current_note_visible = "visible";
     }
 }
+
+window.addEventListener("localechange", function() {
+    if (current_note_id) {
+        current_note_text = "";
+        set_current_note(current_note_id);
+    }
+});
 
 function show_crotchet(crotchet, transform) {
     const is_hidden = window.getComputedStyle(crotchet).opacity != "1";

@@ -1,5 +1,6 @@
 export const EN_TRANSLATIONS = {
     locale: "en",
+    note_octave_offset: 0,
     page: {
         title: "Recorder Fingering Graph",
         og_title: "Recorder Fingering Graph",

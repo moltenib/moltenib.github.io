@@ -1,5 +1,6 @@
 export const ES_TRANSLATIONS = {
     locale: "es",
+    note_octave_offset: -1,
     page: {
         title: "Gráfico de digitación de la flauta dulce",
         og_title: "Gráfico de digitación de la flauta dulce",

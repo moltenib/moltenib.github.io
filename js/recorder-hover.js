@@ -1,4 +1,4 @@
-import { HOLE_TOOLTIPS } from "./hole-tooltips.js";
+import { get_hole_tooltip } from "./hole-tooltips.js";
 
 export function on_hole_mouseover(x) {
     x.style.backgroundColor = "black";
@@ -8,7 +8,7 @@ export function on_hole_mouseover(x) {
     const recorder_rect = recorder.getBoundingClientRect();
     const hole_rect = x.getBoundingClientRect();
 
-    element.textContent = HOLE_TOOLTIPS[x.id];
+    element.textContent = get_hole_tooltip(x.id);
     element.style.width = "";
     element.style.right = "auto";
     element.style.display = "block";

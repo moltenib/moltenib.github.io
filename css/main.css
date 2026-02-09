@@ -56,6 +56,18 @@ main a:hover {
     margin: 60px auto auto auto;
     text-align: center;
 }
+.language-selector button {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background: none;
+    color: blue;
+    font: inherit;
+    cursor: pointer;
+}
+.language-selector button:hover {
+    color: black;
+}
 .footnote {
     font-size: 75%;
     font-style: italic;

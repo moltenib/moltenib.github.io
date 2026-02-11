@@ -159,6 +159,11 @@ function set_current_note(note_id) {
     let displayed_note = note_id;
     current_note_id = note_id;
 
+    /* Keep displayed note aligned with pitch conversion logic. */
+    if (ctx.clef == "f") {
+        displayed_note = lines_up(add_octaves(displayed_note, -2), 2);
+    }
+
     /* Soprano sounds one octave above written pitch when not "as written". */
     if (ctx.size == "1" && ctx.as_written == "f") {
         displayed_note = add_octaves(displayed_note, 1);

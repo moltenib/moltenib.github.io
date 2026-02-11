@@ -3,6 +3,12 @@ body {
     font-family: 'Radley';
     font-size: 110%;
 }
+select {
+    font-family: 'Radley', serif;
+    font-size: 0.95em;
+    border: 2px solid black;
+    background-color: white;
+}
 main {
     box-shadow: 0 0 10px grey;
     padding-right: 60px;

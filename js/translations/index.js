@@ -43,8 +43,8 @@ export function detect_locale() {
     const candidates = [
         new URLSearchParams(window.location.search).get("lang"),
         get_stored_locale(),
-        document.documentElement.lang,
-        navigator.language
+        navigator.language,
+        document.documentElement.lang
     ];
 
     for (let i = 0; i < candidates.length; i++) {

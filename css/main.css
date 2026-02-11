@@ -78,7 +78,7 @@ main a:hover {
     font-size: 75%;
     font-style: italic;
 }
-@media (max-width: 300px) {
+@media (max-width: 500px) {
     main {
         display: none;
     }

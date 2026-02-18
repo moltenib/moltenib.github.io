@@ -70,6 +70,26 @@ function get_localized_note_name(note_letter, accidental) {
     return [name, accidental_symbol];
 }
 
+function get_display_accidental(note) {
+    if (ctx.accidental == "1") {
+        return "♯";
+    }
+
+    if (ctx.accidental == "-1") {
+        return "♭";
+    }
+
+    if (ctx.key < 7 && KEYS[ctx.key].indexOf(note[0]) != -1) {
+        return "♯";
+    }
+
+    if (ctx.key > 7 && KEYS[ctx.key].indexOf(line_down(note)[0]) != -1) {
+        return "♭";
+    }
+
+    return "";
+}
+
 function get_localized_octave(octave_text) {
     const octave_number = parseInt(octave_text, 10);
 
@@ -175,10 +195,7 @@ function set_current_note(note_id) {
 
     const letter = displayed_note[0];
     const octave = get_localized_octave(displayed_note.slice(1));
-    const accidental = (
-        ctx.accidental == "1" ? "♯"
-        : (ctx.accidental == "-1" ? "♭" : "")
-    );
+    const accidental = get_display_accidental(displayed_note);
     const localized = get_localized_note_name(letter, accidental);
     const note_name = localized[0];
     const note_accidental = localized[1];

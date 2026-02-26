@@ -60,7 +60,7 @@ function on_language_selector_click(event) {
     apply_i18n(button.dataset.locale);
 }
 
-function render_language_selector(locale, languages) {
+function set_language_selector(locale, languages) {
     const element = document.querySelector(".language-selector");
 
     if (!element) {
@@ -91,7 +91,7 @@ function render_language_selector(locale, languages) {
     }
 }
 
-function render_description(description, footnote) {
+function set_description(description, footnote) {
     const element = document.querySelector(".description");
 
     if (!element || !Array.isArray(description)) {
@@ -107,14 +107,6 @@ function render_description(description, footnote) {
     }
 
     element.innerHTML = parts.join("\n");
-}
-
-function hide_tooltip() {
-    const tooltip = document.getElementById("hole-tooltip");
-
-    if (tooltip) {
-        tooltip.style.display = "none";
-    }
 }
 
 export function apply_i18n(locale = null) {
@@ -145,13 +137,11 @@ export function apply_i18n(locale = null) {
     set_text("#out-of-range p", page.out_of_range);
     set_text("#too-small h3", page.too_small);
 
-    render_description(page.description, page.footnote);
-    render_language_selector(active_locale, page.languages);
-    hide_tooltip();
+    set_description(page.description, page.footnote);
+    set_language_selector(active_locale, page.languages);
+    const tooltip = document.getElementById("hole-tooltip");
 
-    window.dispatchEvent(
-        new CustomEvent("localechange", {
-            detail: { locale: active_locale }
-        })
-    );
+    if (tooltip) {
+        tooltip.style.display = "none";
+    }
 }

@@ -1,38 +1,5 @@
 import { ctx } from "./variables.js";
-
-let key_signature_cache = null;
-
-function get_key_signature_cache() {
-    if (key_signature_cache) {
-        return key_signature_cache;
-    }
-
-    key_signature_cache = {
-        sharps: {
-            g: [],
-            f: []
-        },
-        flats: {
-            g: [],
-            f: []
-        },
-        sharp_elements: document.getElementsByClassName("sharp"),
-        flat_elements: document.getElementsByClassName("flat")
-    };
-
-    for (let i = 0; i < 7; i++) {
-        key_signature_cache.sharps.g.push(
-            document.getElementById("sharp-" + i + "-g"));
-        key_signature_cache.sharps.f.push(
-            document.getElementById("sharp-" + i + "-f"));
-        key_signature_cache.flats.g.push(
-            document.getElementById("flat-" + i + "-g"));
-        key_signature_cache.flats.f.push(
-            document.getElementById("flat-" + i + "-f"));
-    }
-
-    return key_signature_cache;
-}
+import { get_key_signature_cache } from "./cache.js";
 
 export function select_style(value) {
     /* German or Baroque */
@@ -40,15 +7,15 @@ export function select_style(value) {
 }
 
 export function select_accidental(value) {
-    ctx.accidental = value;
+    ctx.accidental = Number(value);
 }
 
 export function select_as_written(value) {
-    ctx.as_written = value;
+    ctx.as_written = (value == "t" ? 1 : 0);
 }
 
 export function select_key(value) {
-    ctx.key = parseInt(value);
+    ctx.key = Number(value);
 
     const cache = get_key_signature_cache();
 
@@ -105,7 +72,7 @@ export function select_clef(value) {
     for (let i = 0; i < elements.length; i++)
         elements[i].style.display = "none";
 
-    if (ctx.size == "4" && ctx.clef == "g") {
+    if (ctx.size == 4 && ctx.clef == "g") {
         const element = document.getElementById(
             "as-written");
 
@@ -121,13 +88,12 @@ export function select_clef(value) {
     }
 
     select_key(ctx.key);
-
 }
 
 export function select_size(value) {
-    ctx.size = value;
+    ctx.size = Number(value);
 
-    const clef_value = (value == "4" ? "f" : "g");
+    const clef_value = (ctx.size == 4 ? "f" : "g");
 
     let element = document.getElementById("clef");
 
@@ -159,7 +125,7 @@ export function select_size(value) {
 
         element.disabled = false;
 
-        if (ctx.size == "4") {
+        if (ctx.size == 4) {
             document.getElementById("style").value = "b";
 
             select_style("b");

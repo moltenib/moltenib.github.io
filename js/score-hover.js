@@ -1,20 +1,22 @@
 import { ctx, HOLES } from "./variables.js";
 import { KEYS } from "./keys.js";
+import {
+    get_current_note_element_cache,
+    get_score_hover_cache
+} from "./cache.js";
 import { get_current_locale, get_translations } from "./translations/index.js";
 import {
     add_octaves,
     line_up,
     lines_up,
     line_down,
-    note_less
+    is_note_less
 } from "./note-operations.js";
 import { get_note, draw_on_recorder } from "./score.js";
 
-let current_note_element = null;
 let current_note_text = "";
 let current_note_visible = "";
 let current_note_id = null;
-let dom_cache = null;
 const NOTE_NAMES_BY_LOCALE = {
     en: {
         c: "C",
@@ -61,7 +63,7 @@ function get_localized_note_name(note_letter, accidental) {
     let name = names[lower_letter] || note_letter.toUpperCase();
     let accidental_symbol = accidental;
 
-    /* In German notation, Bb is written as "B". */
+    /* In German notation, Bb is written as "B" */
     if (locale == "de" && lower_letter == "b" && accidental == "♭") {
         name = "B";
         accidental_symbol = "";
@@ -71,19 +73,19 @@ function get_localized_note_name(note_letter, accidental) {
 }
 
 function get_display_accidental(note) {
-    if (ctx.accidental == "1") {
+    if (ctx.accidental == 1) {
         return "♯";
     }
 
-    if (ctx.accidental == "-1") {
+    if (ctx.accidental == -1) {
         return "♭";
     }
 
-    if (ctx.key < 7 && KEYS[ctx.key].indexOf(note[0]) != -1) {
+    if (ctx.accidental == 0 && ctx.key < 7 && KEYS[ctx.key].indexOf(note[0]) != -1) {
         return "♯";
     }
 
-    if (ctx.key > 7 && KEYS[ctx.key].indexOf(line_down(note)[0]) != -1) {
+    if (ctx.accidental == 0 && ctx.key > 7 && KEYS[ctx.key].indexOf(line_down(note)[0]) != -1) {
         return "♭";
     }
 
@@ -103,43 +105,6 @@ function get_localized_octave(octave_text) {
     return String(octave_number + offset);
 }
 
-function get_current_note_element() {
-    if (!current_note_element) {
-        current_note_element = document.getElementById("current-note");
-    }
-
-    return current_note_element;
-}
-
-function get_dom_cache() {
-    if (dom_cache) {
-        return dom_cache;
-    }
-
-    const hole_elements = {};
-
-    for (let i = 0; i < HOLES.length; i++) {
-        hole_elements[HOLES[i]] = document.getElementById(HOLES[i]);
-    }
-
-    dom_cache = {
-        score: document.getElementById("score"),
-        crotchet_down: document.getElementById("crotchet-stem-down"),
-        crotchet_up: document.getElementById("crotchet-stem-up"),
-        accidental_sharp: document.getElementById("accidental-sharp"),
-        accidental_flat: document.getElementById("accidental-flat"),
-        accidental_elements: document.getElementsByClassName("accidental"),
-        lines_above: document.getElementsByClassName("line-short-above"),
-        lines_below: document.getElementsByClassName("line-short-below"),
-        out_of_range: document.getElementById("out-of-range"),
-        cached_score_width: null,
-        cached_crotchet_x: null,
-        hole_elements: hole_elements
-    };
-
-    return dom_cache;
-}
-
 function get_crotchet_x(cache) {
     const score_width = cache.score.offsetWidth;
 
@@ -156,8 +121,35 @@ function get_crotchet_x(cache) {
     return cache.cached_crotchet_x;
 }
 
-function set_current_note(note_id) {
-    const current_note = get_current_note_element();
+export function get_current_note_text_for(note_id) {
+    if (!note_id) {
+        return "-";
+    }
+
+    let displayed_note = note_id;
+
+    if (ctx.clef == "f") {
+        displayed_note = lines_up(add_octaves(displayed_note, -2), 2);
+    }
+
+    if (ctx.size == 1 && ctx.as_written == 0) {
+        displayed_note = add_octaves(displayed_note, 1);
+    }
+
+    if (ctx.size == 4 && ctx.as_written == 0) {
+        displayed_note = add_octaves(displayed_note, -1);
+    }
+
+    const letter = displayed_note[0];
+    const octave = get_localized_octave(displayed_note.slice(1));
+    const accidental = get_display_accidental(displayed_note);
+    const localized = get_localized_note_name(letter, accidental);
+
+    return localized[0] + localized[1] + octave;
+}
+
+function display_current_note_by_id(note_id) {
+    const current_note = get_current_note_element_cache();
 
     if (!current_note) {
         return;
@@ -176,31 +168,8 @@ function set_current_note(note_id) {
         return;
     }
 
-    let displayed_note = note_id;
     current_note_id = note_id;
-
-    /* Keep displayed note aligned with pitch conversion logic. */
-    if (ctx.clef == "f") {
-        displayed_note = lines_up(add_octaves(displayed_note, -2), 2);
-    }
-
-    /* Soprano sounds one octave above written pitch when not "as written". */
-    if (ctx.size == "1" && ctx.as_written == "f") {
-        displayed_note = add_octaves(displayed_note, 1);
-    }
-    /* Bass is written one octave above sounding pitch when not "as written". */
-    if (ctx.size == "4" && ctx.as_written == "f") {
-        displayed_note = add_octaves(displayed_note, -1);
-    }
-
-    const letter = displayed_note[0];
-    const octave = get_localized_octave(displayed_note.slice(1));
-    const accidental = get_display_accidental(displayed_note);
-    const localized = get_localized_note_name(letter, accidental);
-    const note_name = localized[0];
-    const note_accidental = localized[1];
-
-    const next_text = note_name + note_accidental + octave;
+    const next_text = get_current_note_text_for(note_id);
 
     if (current_note_text != next_text) {
         current_note.textContent = next_text;
@@ -212,23 +181,16 @@ function set_current_note(note_id) {
     }
 }
 
-window.addEventListener("localechange", function() {
-    if (current_note_id) {
-        current_note_text = "";
-        set_current_note(current_note_id);
-    }
-});
-
-function show_crotchet(crotchet, transform) {
+function display_crotchet_transition(crotchet, transform) {
     const is_hidden = window.getComputedStyle(crotchet).opacity != "1";
 
     if (is_hidden) {
-        /* If hidden, place instantly so it appears in place instead of sliding in. */
+        /* If hidden, place instantly so it appears in place instead of sliding in */
         crotchet.classList.add("no-transition");
         crotchet.style.transform = transform;
         crotchet.style.opacity = "1";
 
-        /* Force style flush before restoring transitions. */
+        /* Force style flush before restoring transitions */
         void crotchet.offsetWidth;
         crotchet.classList.remove("no-transition");
         return;
@@ -240,13 +202,13 @@ function show_crotchet(crotchet, transform) {
 
 function display_accidental(crotchet, line, crotchet_x) {
     let element = null;
-    const cache = get_dom_cache();
+    const cache = get_score_hover_cache();
     const accidental_sharp = cache.accidental_sharp;
     const accidental_flat = cache.accidental_flat;
 
     if (
             /* If the accidental is sharp */
-            ctx.accidental == "1"
+            ctx.accidental == 1
             && (
                 ctx.key < 7
                 && (
@@ -270,7 +232,7 @@ function display_accidental(crotchet, line, crotchet_x) {
 
     } else if (
             /* Flat is selected */
-            ctx.accidental == "-1"
+            ctx.accidental == -1
             && (
                 ctx.key > 7
                 && (
@@ -330,7 +292,7 @@ function display_accidental(crotchet, line, crotchet_x) {
 }
 
 function display_crotchet(line, active_id, inactive_id, y_offset) {
-    const cache = get_dom_cache();
+    const cache = get_score_hover_cache();
     const inactive = (
         inactive_id == "crotchet-stem-up"
         ? cache.crotchet_up
@@ -350,7 +312,7 @@ function display_crotchet(line, active_id, inactive_id, y_offset) {
         + line.offsetTop + y_offset;
 
     const transform = "translate(" + x + "px, " + y + "px)";
-    show_crotchet(crotchet, transform);
+    display_crotchet_transition(crotchet, transform);
 
     display_accidental(crotchet, line, x);
 }
@@ -373,15 +335,15 @@ function display_crotchet_stem_up(line) {
 
 export function on_note_above_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
-    set_current_note(x.id);
+    display_current_note_by_id(x.id);
 
     display_crotchet_stem_down(x);
 
-    const lines = get_dom_cache().lines_above;
+    const lines = get_score_hover_cache().lines_above;
 
     for (let i = 0; i < lines.length; i++) {
         /* Greater or equal than */
-        if (!note_less(x.id, lines[i].id)) {
+        if (!is_note_less(x.id, lines[i].id)) {
             lines[i].style.background
                 = "linear-gradient(to right, white 45%, black 45%, black 57%, white 57%)";
 
@@ -399,7 +361,7 @@ export function on_note_above_score_mouseover(x) {
 
 export function on_note_above_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
-    set_current_note(x.id);
+    display_current_note_by_id(x.id);
 
     display_crotchet_stem_down(x);
 
@@ -409,7 +371,7 @@ export function on_note_above_middle_mouseover(x) {
 
 export function on_note_below_middle_mouseover(x) {
     const note_and_sharp = get_note(x.id);
-    set_current_note(x.id);
+    display_current_note_by_id(x.id);
 
     display_crotchet_stem_up(x);
 
@@ -419,14 +381,14 @@ export function on_note_below_middle_mouseover(x) {
 
 export function on_note_below_score_mouseover(x) {
     const note_and_sharp = get_note(x.id);
-    set_current_note(x.id);
+    display_current_note_by_id(x.id);
 
     display_crotchet_stem_up(x);
 
-    const lines = get_dom_cache().lines_below;
+    const lines = get_score_hover_cache().lines_below;
 
     for (let i = 0; i < lines.length; i++) {
-        if (note_less(lines[i].id, x.id)) {
+        if (is_note_less(lines[i].id, x.id)) {
             lines[i].style.background
                 = "none";
 
@@ -443,8 +405,8 @@ export function on_note_below_score_mouseover(x) {
 }
 
 export function on_score_mouseout(x) {
-    set_current_note(null);
-    const cache = get_dom_cache();
+    display_current_note_by_id(null);
+    const cache = get_score_hover_cache();
 
     HOLES.forEach(
         function(hole, index) {

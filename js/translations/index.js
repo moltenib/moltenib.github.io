@@ -64,7 +64,7 @@ export function set_locale(locale) {
     try {
         window.localStorage.setItem(STORAGE_KEY, current_locale);
     } catch (_error) {
-        /* Ignore storage errors in restricted environments. */
+        /* Ignore storage errors in restricted environments */
     }
 
     return current_locale;

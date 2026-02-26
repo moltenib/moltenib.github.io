@@ -8,7 +8,7 @@ import {
     add_octaves,
     add_semitone,
     substract_semitone,
-    note_and_sharp_to_index
+    get_note_and_sharp_index
 } from "./note-operations.js";
 
 /* The fingering that should be used on a C recorder */
@@ -23,7 +23,7 @@ export function get_note(note) {
     }
 
     if (
-            ctx.accidental == "1"
+            ctx.accidental == 1
             || (
                 ctx.key < 7
                 && KEYS[ctx.key].indexOf(n[0]) != -1
@@ -32,11 +32,11 @@ export function get_note(note) {
         return add_semitone(n);
 
     } else if (
-            ctx.accidental == "-1"
+            ctx.accidental == -1
             || (
                 ctx.key > 7
                 && KEYS[ctx.key].indexOf(
-                    line_down(note)[0]) != -1
+                    line_down(n)[0]) != -1
             )
     ) {
         return substract_semitone(n);
@@ -46,7 +46,7 @@ export function get_note(note) {
     /* Return search criteria for the position map */
     return [n, "n"];
 }
-function note_and_sharp_to_alto(note_and_sharp) {
+function convert_note_and_sharp_to_alto(note_and_sharp) {
     let n = lines_down(note_and_sharp[0], 2);
 
     let sharp = note_and_sharp[1];
@@ -73,7 +73,7 @@ function note_and_sharp_to_alto(note_and_sharp) {
     return [n, sharp];
 }
 
-function note_and_sharp_to_soprano(note_and_sharp) {
+function convert_note_and_sharp_to_soprano(note_and_sharp) {
     return [
         add_octaves(note_and_sharp[0], -1),
         note_and_sharp[1]
@@ -81,10 +81,10 @@ function note_and_sharp_to_soprano(note_and_sharp) {
 
 }
 
-function note_and_sharp_to_bass(note_and_sharp) {
-    note_and_sharp = note_and_sharp_to_alto(note_and_sharp);
+function convert_note_and_sharp_to_bass(note_and_sharp) {
+    note_and_sharp = convert_note_and_sharp_to_alto(note_and_sharp);
 
-    const raise_by = (ctx.as_written == "t" ? 1 : 2);
+    const raise_by = (ctx.as_written == 1 ? 1 : 2);
 
     return [
         add_octaves(note_and_sharp[0], raise_by),
@@ -94,21 +94,21 @@ function note_and_sharp_to_bass(note_and_sharp) {
 
 /* Main drawing function, takes the notes played by a tenor recorder */
 export function draw_on_recorder(note_and_sharp) {
-    if (ctx.size == "1" && ctx.as_written == "t") {
-        note_and_sharp = note_and_sharp_to_soprano(
+    if (ctx.size == 1 && ctx.as_written == 1) {
+        note_and_sharp = convert_note_and_sharp_to_soprano(
             note_and_sharp);
 
-    } else if (ctx.size == "2") {
-        note_and_sharp = note_and_sharp_to_alto(
+    } else if (ctx.size == 2) {
+        note_and_sharp = convert_note_and_sharp_to_alto(
             note_and_sharp);
 
-    } else if (ctx.size == "4") {
-        note_and_sharp = note_and_sharp_to_bass(
+    } else if (ctx.size == 4) {
+        note_and_sharp = convert_note_and_sharp_to_bass(
             note_and_sharp);
 
     }
 
-    const index = note_and_sharp_to_index(note_and_sharp);
+    const index = get_note_and_sharp_index(note_and_sharp);
     const position = (index != null ? POSITIONS[index] : null);
 
     if (

@@ -46,7 +46,7 @@ export function lines_down(note, n) {
     return result;
 }
 
-export function note_less(note1, note2) {
+export function is_note_less(note1, note2) {
     if (note1[1] < note2[1])
         return true;
 
@@ -82,8 +82,8 @@ export function note_less(note1, note2) {
     return false;
 }
 
-export function note_greater(note1, note2) {
-    return note1 != note2 && !note_less(note1, note2);
+export function is_note_greater(note1, note2) {
+    return note1 != note2 && !is_note_less(note1, note2);
 }
 
 export function add_octaves(note, n) {
@@ -119,7 +119,7 @@ export function substract_semitone(note) {
 
 }
 
-export function note_to_index(note, sharp) {
+export function get_note_index(note, sharp) {
     let base;
 
     switch (note[0]) {
@@ -142,6 +142,6 @@ export function note_to_index(note, sharp) {
     return (octave - 4) * 12 + base + (sharp == "s" ? 1 : 0);
 }
 
-export function note_and_sharp_to_index(note_and_sharp) {
-    return note_to_index(note_and_sharp[0], note_and_sharp[1]);
+export function get_note_and_sharp_index(note_and_sharp) {
+    return get_note_index(note_and_sharp[0], note_and_sharp[1]);
 }
